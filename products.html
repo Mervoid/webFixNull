@@ -4,13 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Productos - FixNull</title>
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-  <!-- Estilos generales -->
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="./css/styles.css">
   <style>
     :root {
       --primary: #2563eb;
@@ -23,24 +19,52 @@
       --danger: #ef4444;
     }
 
-    /* Header mejorado */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8fafc;
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    /* Header */
     header {
+      background: linear-gradient(135deg, var(--secondary) 0%, #1e293b 100%);
+      color: white;
+      padding: 1rem 2rem;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-    
+
     .header-container {
       max-width: 1400px;
       margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    
-    .whatsapp-contact {
-      background: linear-gradient(135deg, #25d366, #128c7e);
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.8rem;
     }
-    
-    /* Layout mejorado */
+
+    .logo i {
+      color: var(--accent);
+    }
+
+    /* Layout */
     .products-page {
       display: flex;
       max-width: 1400px;
@@ -48,7 +72,7 @@
       gap: 2rem;
       padding: 0 1rem;
     }
-    
+
     .filter-panel {
       flex: 0 0 280px;
       background: white;
@@ -61,7 +85,7 @@
       align-self: flex-start;
       border: 1px solid #e2e8f0;
     }
-    
+
     .filter-panel h3 {
       margin-bottom: 1.5rem;
       font-family: 'Montserrat', sans-serif;
@@ -70,7 +94,7 @@
       position: relative;
       padding-bottom: 0.8rem;
     }
-    
+
     .filter-panel h3::after {
       content: '';
       position: absolute;
@@ -80,19 +104,18 @@
       height: 3px;
       background-color: var(--accent);
     }
-    
+
     .filter-group {
       margin-bottom: 1.5rem;
-      position: relative;
     }
-    
+
     .filter-group label {
       display: block;
       font-weight: 500;
       margin-bottom: 0.5rem;
       color: var(--secondary);
     }
-    
+
     .filter-group input,
     .filter-group select {
       width: 100%;
@@ -102,33 +125,33 @@
       font-size: 1rem;
       transition: all 0.3s;
     }
-    
+
     .filter-group input:focus,
     .filter-group select:focus {
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
       outline: none;
     }
-    
+
     .price-range {
       display: flex;
       gap: 0.5rem;
     }
-    
+
     .price-range input {
       flex: 1;
     }
-    
+
     .filter-check {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .filter-check input {
       width: auto;
     }
-    
+
     #clearFilters {
       background-color: #f1f5f9;
       color: #4a5568;
@@ -140,19 +163,19 @@
       cursor: pointer;
       transition: all 0.3s;
     }
-    
+
     #clearFilters:hover {
       background-color: #e2e8f0;
     }
-    
-    /* Lista de productos mejorada */
+
+    /* Product List */
     .products-list {
       flex: 1;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 2rem;
     }
-    
+
     .product-card {
       background: white;
       border-radius: 12px;
@@ -163,12 +186,12 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
     }
-    
+
     .product-card:hover {
       transform: translateY(-8px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
-    
+
     .sale-badge {
       position: absolute;
       top: 12px;
@@ -181,7 +204,20 @@
       font-weight: 600;
       z-index: 1;
     }
-    
+
+    .new-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+
     .product-image {
       height: 180px;
       background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
@@ -190,25 +226,25 @@
       justify-content: center;
       padding: 1rem;
     }
-    
+
     .product-image img {
       max-height: 100%;
       max-width: 100%;
       object-fit: contain;
       transition: transform 0.3s ease;
     }
-    
+
     .product-card:hover .product-image img {
       transform: scale(1.05);
     }
-    
+
     .product-info {
       padding: 1.2rem;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
-    
+
     .product-info h4 {
       font-family: 'Montserrat', sans-serif;
       margin-bottom: 0.5rem;
@@ -216,7 +252,7 @@
       font-size: 1.1rem;
       line-height: 1.3;
     }
-    
+
     .product-info p {
       flex: 1;
       font-size: 0.9rem;
@@ -224,25 +260,25 @@
       margin-bottom: 0.75rem;
       line-height: 1.5;
     }
-    
+
     .price-group {
       margin-bottom: 0.75rem;
       font-size: 1.1rem;
       font-weight: 600;
       color: var(--secondary);
     }
-    
+
     .price-group .original-price {
       text-decoration: line-through;
       color: #a0aec0;
       font-size: 0.9rem;
       margin-right: 0.5rem;
     }
-    
+
     .price-group .sale-price {
       color: var(--success);
     }
-    
+
     .buy-btn {
       display: inline-flex;
       align-items: center;
@@ -256,82 +292,106 @@
       font-weight: 500;
       transition: background 0.3s, transform 0.2s;
       font-size: 1rem;
+      border: none;
+      cursor: pointer;
     }
-    
+
     .buy-btn:hover {
       background: linear-gradient(135deg, #128c7e, #0d7a6d);
       transform: translateY(-2px);
     }
-    
-    .rating {
-      display: flex;
-      margin: 0.5rem 0;
-      color: #f59e0b;
-    }
-    
-    .rating i {
-      font-size: 0.9rem;
-    }
-    
-    /* Mensaje de no productos */
-    .no-products {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 3rem;
+
+    /* Sync Status */
+    .sync-status {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      padding: 0.8rem 1.2rem;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      z-index: 1000;
+      animation: fadeIn 0.5s;
     }
-    
-    .no-products i {
-      font-size: 3rem;
-      color: #cbd5e0;
-      margin-bottom: 1rem;
+
+    .sync-status i {
+      color: var(--success);
+      animation: spin 1.5s linear infinite;
     }
-    
-    .no-products p {
-      color: #718096;
-      font-size: 1.1rem;
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      z-index: 1000;
+      transform: translateX(120%);
+      transition: transform 0.4s ease;
     }
-    
-    /* Responsive mejorado */
-    @media (max-width: 992px) {
-      .products-page {
-        flex-direction: column;
-      }
-      
-      .filter-panel {
-        position: static;
-        width: 100%;
-      }
-      
-      .products-list {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
+
+    .notification.show {
+      transform: translateX(0);
     }
-    
-    @media (max-width: 576px) {
-      .products-list {
-        grid-template-columns: 1fr;
-      }
-      
-      .price-range {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
+
+    .notification i {
+      font-size: 1.5rem;
     }
-    
-    /* Animaciones */
+
+    .notification.success i {
+      color: var(--success);
+    }
+
+    .notification.info i {
+      color: var(--primary);
+    }
+
+    .notification-content h4 {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .notification-content p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* Animations */
     @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
+
     .product-card {
-      animation: fadeIn 0.5s ease forwards;
+      animation: fadeInUp 0.5s ease forwards;
       opacity: 0;
     }
-    
+
     .product-card:nth-child(1) { animation-delay: 0.1s; }
     .product-card:nth-child(2) { animation-delay: 0.2s; }
     .product-card:nth-child(3) { animation-delay: 0.3s; }
@@ -341,26 +401,36 @@
   </style>
 </head>
 <body>
-  <!-- Header reutilizado -->
-  <header>
-    <div class="header-container">
-      <div class="logo"><i class="fas fa-microchip"></i><span>FixNull</span></div>
-      <button class="mobile-menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
-      <nav id="mainNav">
-        <ul>
-          <li><a href="index.html#inicio">Inicio</a></li>
-          <li><a href="products.html" class="active">Productos</a></li>
-          <li><a href="index.html#servicios">Servicios</a></li>
-          <li><a href="index.html#testimonios">Testimonios</a></li>
-          <li><a href="index.html#contacto">Contacto</a></li>
-        </ul>
-      </nav>
-      <a href="#" class="whatsapp-contact"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-    </div>
-  </header>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <span>FixNull</span>
+            </div>
+            <button class="mobile-menu-btn" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="products.html">Productos</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <!-- Botón de Login si NO está logueado -->
+                    <li id="loginMenuItem"><a href="login.html">Login</a></li>
+                    <li id="invMenuItem" style="display:none;"><a href="inventory.html">Inventario</a></li>
+                </ul>
+            </nav>
+            <a href="#" class="whatsapp-contact" style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #25d366, #128c7e); padding: 0.6rem 1.2rem; border-radius: 50px; color: white; text-decoration: none; font-weight: 500;">
+          <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        </div>
+    </header>
+
 
   <div class="products-page">
-    <!-- Panel de filtros mejorado -->
     <aside class="filter-panel">
       <h3>Filtrar Productos</h3>
       <div class="filter-group">
@@ -371,6 +441,12 @@
         <label for="filterCategory">Categoría</label>
         <select id="filterCategory">
           <option value="all">Todas las categorías</option>
+          <option value="Procesadores">Procesadores</option>
+          <option value="Tarjetas Gráficas">Tarjetas Gráficas</option>
+          <option value="Memorias RAM">Memorias RAM</option>
+          <option value="Almacenamiento">Almacenamiento</option>
+          <option value="Placas Base">Placas Base</option>
+          <option value="Refrigeración">Refrigeración</option>
         </select>
       </div>
       <div class="filter-group">
@@ -386,136 +462,80 @@
           <label for="filterOnSale">Solo en oferta</label>
         </div>
       </div>
-      <button id="clearFilters" class="btn btn-secondary">Limpiar filtros</button>
+      <button id="clearFilters">Limpiar filtros</button>
+      
+      <div style="margin-top: 2rem; background: #f0fdf4; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--success);">
+        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Sincronización en tiempo real</h4>
+        <p style="font-size: 0.9rem; color: #4b5563;">Actualizacion constante de cambios de productos</p>
+      </div>
     </aside>
 
-    <!-- Lista de productos mejorada -->
     <section class="products-list" id="productsList">
-      <!-- Productos dinámicos -->
+      <!-- Productos se cargarán dinámicamente -->
     </section>
   </div>
 
+  <div class="sync-status" id="syncStatus">
+    <i class="fas fa-sync-alt"></i>
+    <span>Ofertas Nuevas todos los dias !!</span>
+  </div>
+
+  <div class="notification" id="notification">
+    <i class="fas fa-check-circle success"></i>
+    <div class="notification-content">
+      <h4>Actualizado</h4>
+      <p>Los cambios se han aplicado correctamente</p>
+    </div>
+  </div>
+
   <script>
-    // Datos de productos de ejemplo
-    const inventory = [
-      {
-        imgUrl: "https://images.unsplash.com/photo-1587202372775-e229f172b3a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
-        name: "AMD Ryzen 9 5900X",
-        category: "Procesadores",
-        description: "12 núcleos, 24 hilos, hasta 4.8GHz, compatible con AM4",
-        price: 489.99,
-        onSale: false,
-        salePrice: 0,
-        rating: 4.8
-      },
-      {
-        imgUrl: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
-        name: "NVIDIA RTX 3080 Ti",
-        category: "Tarjetas Gráficas",
-        description: "12GB GDDR6X, 10240 núcleos CUDA, ray tracing",
-        price: 1099.99,
-        onSale: true,
-        salePrice: 999.99,
-        rating: 4.9
-      },
-      {
-        imgUrl: "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
-        name: "Corsair Vengeance RGB 32GB",
-        category: "Memorias RAM",
-        description: "DDR4 3600MHz, CL16, iluminación RGB",
-        price: 169.99,
-        onSale: false,
-        salePrice: 0,
-        rating: 4.7
-      },
-      {
-        imgUrl: "https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
-        name: "Samsung 980 Pro 1TB",
-        category: "Almacenamiento",
-        description: "NVMe M.2, PCIe 4.0, hasta 7000MB/s lectura",
-        price: 149.99,
-        onSale: true,
-        salePrice: 129.99,
-        rating: 4.8
-      },
-      {
-        imgUrl: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
-        name: "ASUS ROG Strix B550-F",
-        category: "Placas Base",
-        description: "AMD AM4, ATX, PCIe 4.0, Wi-Fi 6, RGB",
-        price: 189.99,
-        onSale: false,
-        salePrice: 0,
-        rating: 4.6
-      },
-      {
-        imgUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
-        name: "NZXT Kraken X63",
-        category: "Refrigeración",
-        description: "Enfriamiento líquido, 280mm, RGB, AM4/LGA1700",
-        price: 149.99,
-        onSale: true,
-        salePrice: 129.99,
-        rating: 4.7
-      }
-    ];
+    // Función para mostrar notificación
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      const content = notification.querySelector('.notification-content h4');
+      content.textContent = message;
+      
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 3000);
+    }
 
-    localStorage.setItem('inventory', JSON.stringify(inventory));
-    
-    const productsList = document.getElementById('productsList');
-    const filterName = document.getElementById('searchName');
-    const filterCategory = document.getElementById('filterCategory');
-    const minPrice = document.getElementById('minPrice');
-    const maxPrice = document.getElementById('maxPrice');
-    const filterOnSale = document.getElementById('filterOnSale');
-    const clearBtn = document.getElementById('clearFilters');
+    // Obtener productos del localStorage
+    function getInventory() {
+      const inventoryData = localStorage.getItem('inventory');
+      return inventoryData ? JSON.parse(inventoryData) : [];
+    }
 
-    // Llenar categorías
-    const categories = Array.from(new Set(inventory.map(i => i.category)));
-    categories.forEach(cat => {
-      const opt = document.createElement('option'); 
-      opt.value = cat; 
-      opt.textContent = cat;
-      filterCategory.appendChild(opt);
-    });
-
-    // Renderizar lista mejorada
+    // Renderizar productos
     function renderProducts(list) {
+      const productsList = document.getElementById('productsList');
       productsList.innerHTML = '';
+      
       if (!list.length) {
         productsList.innerHTML = `
-          <div class="no-products">
-            <i class="fas fa-box-open"></i>
-            <p>No encontramos productos con esos filtros.</p>
+          <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+            <i class="fas fa-box-open" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 1rem;"></i>
+            <h3 style="font-family: 'Montserrat', sans-serif; color: var(--secondary); margin-bottom: 0.5rem;">No se encontraron productos</h3>
+            <p style="color: var(--gray);">Intenta ajustar tus filtros o agregar nuevos productos desde el panel de administración</p>
           </div>
         `;
         return;
       }
-      list.forEach(item => {
-        const card = document.createElement('div'); 
-        card.className = 'product-card';
-        
-        // Crear estrellas de rating
-        let starsHtml = '';
-        for (let i = 1; i <= 5; i++) {
-          if (i <= Math.floor(item.rating)) {
-            starsHtml += '<i class="fas fa-star"></i>';
-          } else if (i - 0.5 <= item.rating) {
-            starsHtml += '<i class="fas fa-star-half-alt"></i>';
-          } else {
-            starsHtml += '<i class="far fa-star"></i>';
-          }
-        }
-        
-        card.innerHTML = `
+      
+      list.forEach((item, index) => {
+        const productCard = document.createElement('div');
+        productCard.className = 'product-card';
+        productCard.innerHTML = `
           ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
+          ${index > 3 ? '<span class="new-badge">Nuevo</span>' : ''}
           <div class="product-image">
             <img src="${item.imgUrl}" alt="${item.name}">
           </div>
           <div class="product-info">
             <h4>${item.name}</h4>
             <p>${item.description}</p>
-            <div class="rating">${starsHtml} <span style="color: #718096; font-size: 0.8rem; margin-left: 5px;">${item.rating}</span></div>
             <div class="price-group">
               ${item.onSale ? 
                 `<span class="original-price">$${item.price.toFixed(2)}</span>
@@ -523,45 +543,167 @@
                 : `$${item.price.toFixed(2)}`
               }
             </div>
-            <a href="https://wa.me/+51989530163?text=Hola,%20quiero%20comprar%20${encodeURIComponent(item.name)}" 
-               target="_blank" class="buy-btn">
-              <i class="fab fa-whatsapp"></i> Comprar
-            </a>
+            <button class="buy-btn">
+              <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+            </button>
           </div>
         `;
-        productsList.appendChild(card);
+        
+        // Agregar evento de compra
+        const buyBtn = productCard.querySelector('.buy-btn');
+        buyBtn.addEventListener('click', () => {
+          const message = `Hola, estoy interesado en el producto: ${item.name}`;
+          const whatsappUrl = `https://wa.me/51989530163?text=${encodeURIComponent(message)}`;
+          window.open(whatsappUrl, '_blank');
+        });
+        
+        productsList.appendChild(productCard);
       });
     }
 
-    // Filtrar según inputs
-    function applyFilters() {
-      let filtered = inventory.filter(item => {
-        const nameMatch = item.name.toLowerCase().includes(filterName.value.toLowerCase());
-        const catMatch = filterCategory.value === 'all' || item.category === filterCategory.value;
-        const min = parseFloat(minPrice.value) || 0;
-        const max = parseFloat(maxPrice.value) || Infinity;
-        const priceMatch = item.price >= min && item.price <= max;
-        const saleMatch = !filterOnSale.checked || item.onSale;
-        return nameMatch && catMatch && priceMatch && saleMatch;
+    // Filtrar productos
+    function filterProducts() {
+      const searchName = document.getElementById('searchName').value.toLowerCase();
+      const filterCategory = document.getElementById('filterCategory').value;
+      const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
+      const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
+      const filterOnSale = document.getElementById('filterOnSale').checked;
+      
+      const inventory = getInventory();
+      
+      const filtered = inventory.filter(item => {
+        // Filtrar por nombre
+        if (searchName && !item.name.toLowerCase().includes(searchName)) {
+          return false;
+        }
+        
+        // Filtrar por categoría
+        if (filterCategory !== 'all' && item.category !== filterCategory) {
+          return false;
+        }
+        
+        // Filtrar por precio
+        if (item.price < minPrice || item.price > maxPrice) {
+          return false;
+        }
+        
+        // Filtrar por oferta
+        if (filterOnSale && !item.onSale) {
+          return false;
+        }
+        
+        return true;
       });
+      
       renderProducts(filtered);
     }
 
-    // Eventos
-    [filterName, filterCategory, minPrice, maxPrice, filterOnSale].forEach(el => {
-      el.addEventListener('input', applyFilters);
-    });
-    clearBtn.addEventListener('click', () => {
-      filterName.value = '';
-      filterCategory.value = 'all';
-      minPrice.value = '';
-      maxPrice.value = '';
-      filterOnSale.checked = false;
-      renderProducts(inventory);
+    // Event listeners para filtros
+    document.getElementById('searchName').addEventListener('input', filterProducts);
+    document.getElementById('filterCategory').addEventListener('change', filterProducts);
+    document.getElementById('minPrice').addEventListener('input', filterProducts);
+    document.getElementById('maxPrice').addEventListener('input', filterProducts);
+    document.getElementById('filterOnSale').addEventListener('change', filterProducts);
+    document.getElementById('clearFilters').addEventListener('click', () => {
+      document.getElementById('searchName').value = '';
+      document.getElementById('filterCategory').value = 'all';
+      document.getElementById('minPrice').value = '';
+      document.getElementById('maxPrice').value = '';
+      document.getElementById('filterOnSale').checked = false;
+      filterProducts();
     });
 
-    // Inicialización
-    renderProducts(inventory);
+    // Simular almacenamiento local con datos iniciales
+    const initialInventory = [
+      {
+        imgUrl: "https://images.unsplash.com/photo-1587202372775-e229f172b3a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        name: "AMD Ryzen 9 5900X",
+        category: "Procesadores",
+        description: "12 núcleos, 24 hilos, hasta 4.8GHz, compatible con AM4",
+        price: 489.99,
+        onSale: false,
+        salePrice: 0
+      },
+      {
+        imgUrl: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        name: "NVIDIA RTX 3080 Ti",
+        category: "Tarjetas Gráficas",
+        description: "12GB GDDR6X, 10240 núcleos CUDA, ray tracing",
+        price: 1099.99,
+        onSale: true,
+        salePrice: 999.99
+      },
+      {
+        imgUrl: "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        name: "Corsair Vengeance RGB 32GB",
+        category: "Memorias RAM",
+        description: "DDR4 3600MHz, CL16, iluminación RGB",
+        price: 169.99,
+        onSale: false,
+        salePrice: 0
+      },
+      {
+        imgUrl: "https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        name: "Samsung 980 Pro 1TB",
+        category: "Almacenamiento",
+        description: "NVMe M.2, PCIe 4.0, hasta 7000MB/s lectura",
+        price: 149.99,
+        onSale: true,
+        salePrice: 129.99
+      }
+    ];
+
+    // Inicializar localStorage si está vacío
+    if (!localStorage.getItem('inventory')) {
+      localStorage.setItem('inventory', JSON.stringify(initialInventory));
+      showNotification('Inventario inicial cargado');
+    }
+
+    // Cargar productos iniciales
+    filterProducts();
+
+    // Simular actualización desde inventory
+    document.getElementById('addProductBtn').addEventListener('click', () => {
+      // Crear nuevo producto
+      const newProduct = {
+        imgUrl: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+        name: "ASUS ROG Strix B550-F",
+        category: "Placas Base",
+        description: "AMD AM4, ATX, PCIe 4.0, Wi-Fi 6, RGB",
+        price: 189.99,
+        onSale: false,
+        salePrice: 0
+      };
+      
+      // Obtener inventario actual
+      const currentInventory = getInventory();
+      
+      // Agregar nuevo producto
+      currentInventory.push(newProduct);
+      
+      // Actualizar localStorage
+      localStorage.setItem('inventory', JSON.stringify(currentInventory));
+      
+      // Mostrar notificación
+      showNotification('Producto agregado al inventario');
+      
+      // Volver a renderizar
+      filterProducts();
+    });
   </script>
+  
+  <!-- Header
+   
+  <div style="position: fixed; bottom: 20px; left: 20px; background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+    <h3 style="margin-bottom: 1rem;">Demostración de sincronización</h3>
+    <button id="addProductBtn" style="background: var(--primary); color: white; border: none; padding: 0.7rem 1.2rem; border-radius: 6px; cursor: pointer;">
+      <i class="fas fa-plus"></i> Agregar producto de prueba
+    </button>
+    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--gray); max-width: 300px;">
+      Este botón simula agregar un producto desde el panel de administración
+    </p>
+  </div>
+
+  -->
 </body>
 </html>
