@@ -64,6 +64,68 @@
       color: var(--accent);
     }
 
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .whatsapp-contact {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      padding: 0.6rem 1.2rem;
+      border-radius: 50px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-contact:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
     /* Layout */
     .products-page {
       display: flex;
@@ -86,8 +148,14 @@
       border: 1px solid #e2e8f0;
     }
 
-    .filter-panel h3 {
+    .filter-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       margin-bottom: 1.5rem;
+    }
+
+    .filter-panel h3 {
       font-family: 'Montserrat', sans-serif;
       font-size: 1.3rem;
       color: var(--secondary);
@@ -103,6 +171,15 @@
       width: 50px;
       height: 3px;
       background-color: var(--accent);
+    }
+
+    .category-badge {
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
     .filter-group {
@@ -166,6 +243,24 @@
 
     #clearFilters:hover {
       background-color: #e2e8f0;
+    }
+
+    .sync-info {
+      margin-top: 2rem;
+      background: #f0fdf4;
+      padding: 1rem;
+      border-radius: 8px;
+      border-left: 4px solid var(--success);
+    }
+
+    .sync-info h4 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sync-info p {
+      font-size: 0.9rem;
+      color: #4b5563;
     }
 
     /* Product List */
@@ -301,18 +396,6 @@
       transform: translateY(-2px);
     }
 
-
-    .category-badge {
-      background-color: var(--primary);
-      color: white;
-      padding: 0.2rem 0.5rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      margin-left: 0.5rem;
-    }
-
-
-
     /* Sync Status */
     .sync-status {
       position: fixed;
@@ -362,7 +445,7 @@
     .notification.success i {
       color: var(--success);
     }
-
+    
     .notification.info i {
       color: var(--primary);
     }
@@ -387,7 +470,7 @@
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-
+    
     @keyframes pulse {
       0% { transform: scale(1); }
       50% { transform: scale(1.05); }
@@ -410,41 +493,112 @@
     .product-card:nth-child(4) { animation-delay: 0.4s; }
     .product-card:nth-child(5) { animation-delay: 0.5s; }
     .product-card:nth-child(6) { animation-delay: 0.6s; }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .products-page {
+        flex-direction: column;
+      }
+      
+      .filter-panel {
+        position: static;
+        width: 100%;
+      }
+      
+      .products-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .header-container {
+        flex-wrap: wrap;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 76px;
+        right: -100%;
+        width: 280px;
+        height: calc(100vh - 76px);
+        background-color: var(--secondary);
+        transition: right 0.4s ease;
+        padding: 2rem;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav ul {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .whatsapp-contact {
+        margin-top: 1rem;
+        margin-left: auto;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .products-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .price-range {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .header-container {
+        padding: 1rem;
+      }
+      
+      .logo {
+        font-size: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
-
-    <header>
-        <div class="header-container">
-            <div class="logo">
-                <i class="fas fa-microchip"></i>
-                <span>FixNull</span>
-            </div>
-            <button class="mobile-menu-btn" id="menuBtn">
-                <i class="fas fa-bars"></i>
-            </button>
-            <nav id="mainNav">
-                <ul>
-                    <li><a href="index.html#inicio">Inicio</a></li>
-                    <li><a href="products.html" class="active">Productos</a></li>
-                    <li><a href="index.html#servicios">Servicios</a></li>
-                    <li><a href="index.html#testimonios">Testimonios</a></li>
-                    <li><a href="index.html#contacto">Contacto</a></li>
-                    <!-- Botón de Login si NO está logueado -->
-                    <li id="loginMenuItem"><a href="login.html">Login</a></li>
-                    <li id="invMenuItem" style="display:none;"><a href="inventory.html">Inventario</a></li>
-                </ul>
-            </nav>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fas fa-microchip"></i>
+        <span>FixNull</span>
+      </div>
+      <button class="mobile-menu-btn" id="menuBtn">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="products.html" class="active">Productos</a></li>
+          <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+          <li id="loginMenuItem"><a href="login.html">Login</a></li>
+          <li id="invMenuItem" style="display:none;"><a href="inventory.html">Inventario</a></li>
+        </ul>
+      </nav>
             <a href="#" class="whatsapp-contact" style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #25d366, #128c7e); padding: 0.6rem 1.2rem; border-radius: 50px; color: white; text-decoration: none; font-weight: 500;">
           <i class="fab fa-whatsapp"></i> WhatsApp
-        </a>
-        </div>
-    </header>
-
+      </a>
+    </div>
+  </header>
 
   <div class="products-page">
     <aside class="filter-panel">
-      <h3>Filtrar Productos</h3>
+      <div class="filter-header">
+        <h3>Filtrar</h3>
+        <span id="categoryCount" class="category-badge">0 categorías</span>
+      </div>
+      
       <div class="filter-group">
         <label for="searchName">Nombre</label>
         <input type="text" id="searchName" placeholder="Buscar por nombre...">
@@ -453,12 +607,6 @@
         <label for="filterCategory">Categoría</label>
         <select id="filterCategory">
           <option value="all">Todas las categorías</option>
-          <option value="Procesadores">Procesadores</option>
-          <option value="Tarjetas Gráficas">Tarjetas Gráficas</option>
-          <option value="Memorias RAM">Memorias RAM</option>
-          <option value="Almacenamiento">Almacenamiento</option>
-          <option value="Placas Base">Placas Base</option>
-          <option value="Refrigeración">Refrigeración</option>
         </select>
       </div>
       <div class="filter-group">
@@ -476,9 +624,9 @@
       </div>
       <button id="clearFilters">Limpiar filtros</button>
       
-      <div style="margin-top: 2rem; background: #f0fdf4; padding: 1rem; border-radius: 8px; border-left: 4px solid var(--success);">
-        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Sincronización en tiempo real</h4>
-        <p style="font-size: 0.9rem; color: #4b5563;">Actualizacion constante de cambios de productos</p>
+      <div class="sync-info">
+        <h4>Sincronización en tiempo real</h4>
+        <p>Actualizacion constante de cambios de productos.</p>
       </div>
     </aside>
 
@@ -489,14 +637,14 @@
 
   <div class="sync-status" id="syncStatus">
     <i class="fas fa-sync-alt"></i>
-    <span>Ofertas Nuevas todos los dias !!</span>
+    <span>Ofertas Nuevas todos los días!!</span>
   </div>
 
   <div class="notification" id="notification">
     <i class="fas fa-check-circle success"></i>
     <div class="notification-content">
-      <h4>Actualizado</h4>
-      <p>Los cambios se han aplicado correctamente</p>
+      <h4>Inventario Actualizado</h4>
+      <p>Las categorías se han sincronizado</p>
     </div>
   </div>
 
@@ -518,6 +666,37 @@
     function getInventory() {
       const inventoryData = localStorage.getItem('inventory');
       return inventoryData ? JSON.parse(inventoryData) : [];
+    }
+
+    // Función para actualizar el selector de categorías
+    function updateCategoryFilter() {
+      const inventory = getInventory();
+      const categorySelect = document.getElementById('filterCategory');
+      
+      // Obtener categorías únicas
+      const categories = Array.from(new Set(inventory.map(item => item.category)));
+      
+      // Actualizar contador
+      document.getElementById('categoryCount').textContent = `${categories.length} categorías`;
+      
+      // Guardar la selección actual
+      const currentValue = categorySelect.value;
+      
+      // Limpiar el selector (excepto la opción "Todas")
+      categorySelect.innerHTML = '<option value="all">Todas las categorías</option>';
+      
+      // Agregar nuevas categorías
+      categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        categorySelect.appendChild(option);
+      });
+      
+      // Restaurar la selección anterior si todavía existe
+      if (categories.includes(currentValue)) {
+        categorySelect.value = currentValue;
+      }
     }
 
     // Renderizar productos
@@ -543,7 +722,7 @@
           ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
           ${index > 3 ? '<span class="new-badge">Nuevo</span>' : ''}
           <div class="product-image">
-            <img src="${item.imgUrl}" alt="${item.name}">
+            <img src="${item.imgUrl || 'https://via.placeholder.com/300x180?text=Sin+imagen'}" alt="${item.name}">
           </div>
           <div class="product-info">
             <h4>${item.name}</h4>
@@ -625,97 +804,81 @@
       filterProducts();
     });
 
-    // Simular almacenamiento local con datos iniciales
-    const initialInventory = [
-      {
-        imgUrl: "https://images.unsplash.com/photo-1587202372775-e229f172b3a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        name: "AMD Ryzen 9 5900X",
-        category: "Procesadores",
-        description: "12 núcleos, 24 hilos, hasta 4.8GHz, compatible con AM4",
-        price: 489.99,
-        onSale: false,
-        salePrice: 0
-      },
-      {
-        imgUrl: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        name: "NVIDIA RTX 3080 Ti",
-        category: "Tarjetas Gráficas",
-        description: "12GB GDDR6X, 10240 núcleos CUDA, ray tracing",
-        price: 1099.99,
-        onSale: true,
-        salePrice: 999.99
-      },
-      {
-        imgUrl: "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        name: "Corsair Vengeance RGB 32GB",
-        category: "Memorias RAM",
-        description: "DDR4 3600MHz, CL16, iluminación RGB",
-        price: 169.99,
-        onSale: false,
-        salePrice: 0
-      },
-      {
-        imgUrl: "https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        name: "Samsung 980 Pro 1TB",
-        category: "Almacenamiento",
-        description: "NVMe M.2, PCIe 4.0, hasta 7000MB/s lectura",
-        price: 149.99,
-        onSale: true,
-        salePrice: 129.99
+    // Inicializar al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+      // Simular datos iniciales si no existen
+      if (!localStorage.getItem('inventory')) {
+        const initialInventory = [
+          {
+            imgUrl: "https://images.unsplash.com/photo-1587202372775-e229f172b3a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+            name: "AMD Ryzen 9 5900X",
+            category: "Procesadores",
+            description: "12 núcleos, 24 hilos, hasta 4.8GHz, compatible con AM4",
+            price: 489.99,
+            onSale: false,
+            salePrice: 0
+          },
+          {
+            imgUrl: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+            name: "NVIDIA RTX 3080 Ti",
+            category: "Tarjetas Gráficas",
+            description: "12GB GDDR6X, 10240 núcleos CUDA, ray tracing",
+            price: 1099.99,
+            onSale: true,
+            salePrice: 999.99
+          },
+          {
+            imgUrl: "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+            name: "Corsair Vengeance RGB 32GB",
+            category: "Memorias RAM",
+            description: "DDR4 3600MHz, CL16, iluminación RGB",
+            price: 169.99,
+            onSale: false,
+            salePrice: 0
+          },
+          {
+            imgUrl: "https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+            name: "Samsung 980 Pro 1TB",
+            category: "Almacenamiento",
+            description: "NVMe M.2, PCIe 4.0, hasta 7000MB/s lectura",
+            price: 149.99,
+            onSale: true,
+            salePrice: 129.99
+          }
+        ];
+        
+        localStorage.setItem('inventory', JSON.stringify(initialInventory));
+        showNotification('Inventario inicial cargado');
       }
-    ];
-
-    // Inicializar localStorage si está vacío
-    if (!localStorage.getItem('inventory')) {
-      localStorage.setItem('inventory', JSON.stringify(initialInventory));
-      showNotification('Inventario inicial cargado');
-    }
-
-    // Cargar productos iniciales
-    filterProducts();
-
-    // Simular actualización desde inventory
-    document.getElementById('addProductBtn').addEventListener('click', () => {
-      // Crear nuevo producto
-      const newProduct = {
-        imgUrl: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-        name: "ASUS ROG Strix B550-F",
-        category: "Placas Base",
-        description: "AMD AM4, ATX, PCIe 4.0, Wi-Fi 6, RGB",
-        price: 189.99,
-        onSale: false,
-        salePrice: 0
-      };
       
-      // Obtener inventario actual
-      const currentInventory = getInventory();
-      
-      // Agregar nuevo producto
-      currentInventory.push(newProduct);
-      
-      // Actualizar localStorage
-      localStorage.setItem('inventory', JSON.stringify(currentInventory));
-      
-      // Mostrar notificación
-      showNotification('Producto agregado al inventario');
-      
-      // Volver a renderizar
+      // Actualizar categorías y productos
+      updateCategoryFilter();
       filterProducts();
+      
+      // Mostrar estado de login
+      if (sessionStorage.getItem('isAdmin') === 'true') {
+        document.getElementById('invMenuItem').style.display = 'block';
+        document.getElementById('loginMenuItem').style.display = 'none';
+      }
+    });
+
+    // Escuchar cambios en localStorage para actualizar en tiempo real
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'inventory') {
+        // Actualizar productos y categorías
+        updateCategoryFilter();
+        filterProducts();
+        showNotification('Inventario actualizado');
+      }
+    });
+    
+    // Mobile menu toggle
+    document.getElementById('menuBtn').addEventListener('click', () => {
+      const nav = document.getElementById('mainNav');
+      nav.classList.toggle('active');
+      document.getElementById('menuBtn').innerHTML = nav.classList.contains('active') ?
+        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
   </script>
-  
-  <!-- Header
-   
-  <div style="position: fixed; bottom: 20px; left: 20px; background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-    <h3 style="margin-bottom: 1rem;">Demostración de sincronización</h3>
-    <button id="addProductBtn" style="background: var(--primary); color: white; border: none; padding: 0.7rem 1.2rem; border-radius: 6px; cursor: pointer;">
-      <i class="fas fa-plus"></i> Agregar producto de prueba
-    </button>
-    <p style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--gray); max-width: 300px;">
-      Este botón simula agregar un producto desde el panel de administración
-    </p>
-  </div>
-
-  -->
 </body>
 </html>
