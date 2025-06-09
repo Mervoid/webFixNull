@@ -12,121 +12,332 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/admin.css">
   <style>
-    /* Layout panel izquierdo/derecho */
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #0f172a;
+      --accent: #f59e0b;
+      --light: #f1f5f9;
+      --gray: #94a3b8;
+      --success: #10b981;
+      --danger: #ef4444;
+    }
+
+    /* Header mejorado */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .whatsapp-contact {
+      background: linear-gradient(135deg, #25d366, #128c7e);
+    }
+    
+    /* Layout mejorado */
     .products-page {
       display: flex;
       max-width: 1400px;
-      margin: 100px auto;
+      margin: 20px auto 50px;
       gap: 2rem;
       padding: 0 1rem;
     }
+    
     .filter-panel {
-      flex: 0 0 300px;
-      background: var(--light);
+      flex: 0 0 280px;
+      background: white;
       padding: 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
       height: fit-content;
+      position: sticky;
+      top: 100px;
+      align-self: flex-start;
+      border: 1px solid #e2e8f0;
     }
+    
     .filter-panel h3 {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       color: var(--secondary);
+      position: relative;
+      padding-bottom: 0.8rem;
     }
+    
+    .filter-panel h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background-color: var(--accent);
+    }
+    
     .filter-group {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
     }
+    
     .filter-group label {
       display: block;
       font-weight: 500;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--secondary);
     }
+    
     .filter-group input,
     .filter-group select {
       width: 100%;
-      padding: 0.5rem;
-      border: 1px solid var(--gray);
-      border-radius: 5px;
+      padding: 0.8rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
       font-size: 1rem;
+      transition: all 0.3s;
     }
+    
+    .filter-group input:focus,
+    .filter-group select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
+      outline: none;
+    }
+    
+    .price-range {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .price-range input {
+      flex: 1;
+    }
+    
+    .filter-check {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .filter-check input {
+      width: auto;
+    }
+    
+    #clearFilters {
+      background-color: #f1f5f9;
+      color: #4a5568;
+      border: none;
+      padding: 0.8rem;
+      font-weight: 500;
+      width: 100%;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    #clearFilters:hover {
+      background-color: #e2e8f0;
+    }
+    
+    /* Lista de productos mejorada */
     .products-list {
       flex: 1;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
+      gap: 2rem;
     }
+    
     .product-card {
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      transition: transform 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
+    
     .product-card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
+    
+    .sale-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--success);
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+    
     .product-image {
-      height: 160px;
-      background: #e2e8f0;
+      height: 180px;
+      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 1rem;
     }
+    
     .product-image img {
       max-height: 100%;
+      max-width: 100%;
       object-fit: contain;
+      transition: transform 0.3s ease;
     }
+    
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+    
     .product-info {
-      padding: 1rem;
+      padding: 1.2rem;
       flex: 1;
       display: flex;
       flex-direction: column;
     }
+    
     .product-info h4 {
       font-family: 'Montserrat', sans-serif;
       margin-bottom: 0.5rem;
       color: var(--secondary);
       font-size: 1.1rem;
+      line-height: 1.3;
     }
+    
     .product-info p {
       flex: 1;
       font-size: 0.9rem;
       color: var(--gray);
       margin-bottom: 0.75rem;
+      line-height: 1.5;
     }
+    
     .price-group {
       margin-bottom: 0.75rem;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 600;
       color: var(--secondary);
     }
-    .price-group .sale {
-      color: var(--success);
-      margin-left: 0.5rem;
+    
+    .price-group .original-price {
+      text-decoration: line-through;
+      color: #a0aec0;
+      font-size: 0.9rem;
+      margin-right: 0.5rem;
     }
+    
+    .price-group .sale-price {
+      color: var(--success);
+    }
+    
     .buy-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      background: #25d366;
+      background: linear-gradient(135deg, #25d366, #128c7e);
       color: white;
-      padding: 0.6rem;
+      padding: 0.7rem;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 500;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.2s;
+      font-size: 1rem;
     }
+    
     .buy-btn:hover {
-      background: #128c7e;
+      background: linear-gradient(135deg, #128c7e, #0d7a6d);
+      transform: translateY(-2px);
     }
-    @media (max-width: 768px) {
-      .products-page { flex-direction: column; }
-      .filter-panel { width: 100%; }
+    
+    .rating {
+      display: flex;
+      margin: 0.5rem 0;
+      color: #f59e0b;
     }
+    
+    .rating i {
+      font-size: 0.9rem;
+    }
+    
+    /* Mensaje de no productos */
+    .no-products {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 3rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .no-products i {
+      font-size: 3rem;
+      color: #cbd5e0;
+      margin-bottom: 1rem;
+    }
+    
+    .no-products p {
+      color: #718096;
+      font-size: 1.1rem;
+    }
+    
+    /* Responsive mejorado */
+    @media (max-width: 992px) {
+      .products-page {
+        flex-direction: column;
+      }
+      
+      .filter-panel {
+        position: static;
+        width: 100%;
+      }
+      
+      .products-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .products-list {
+        grid-template-columns: 1fr;
+      }
+      
+      .price-range {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+    
+    /* Animaciones */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .product-card {
+      animation: fadeIn 0.5s ease forwards;
+      opacity: 0;
+    }
+    
+    .product-card:nth-child(1) { animation-delay: 0.1s; }
+    .product-card:nth-child(2) { animation-delay: 0.2s; }
+    .product-card:nth-child(3) { animation-delay: 0.3s; }
+    .product-card:nth-child(4) { animation-delay: 0.4s; }
+    .product-card:nth-child(5) { animation-delay: 0.5s; }
+    .product-card:nth-child(6) { animation-delay: 0.6s; }
   </style>
 </head>
 <body>
@@ -142,8 +353,6 @@
           <li><a href="index.html#servicios">Servicios</a></li>
           <li><a href="index.html#testimonios">Testimonios</a></li>
           <li><a href="index.html#contacto">Contacto</a></li>
-          <li id="loginMenuItem"><a href="login.html">Login</a></li>
-           <li id="invMenuItem" style="display:none;"><a href="inventory.html">Inventario</a></li>
         </ul>
       </nav>
       <a href="#" class="whatsapp-contact"><i class="fab fa-whatsapp"></i> WhatsApp</a>
@@ -151,7 +360,7 @@
   </header>
 
   <div class="products-page">
-    <!-- Panel de filtros -->
+    <!-- Panel de filtros mejorado -->
     <aside class="filter-panel">
       <h3>Filtrar Productos</h3>
       <div class="filter-group">
@@ -161,31 +370,98 @@
       <div class="filter-group">
         <label for="filterCategory">Categoría</label>
         <select id="filterCategory">
-          <option value="all">Todas</option>
+          <option value="all">Todas las categorías</option>
         </select>
       </div>
       <div class="filter-group">
         <label>Precio</label>
-        <div style="display:flex; gap:0.5rem;">
+        <div class="price-range">
           <input type="number" id="minPrice" placeholder="Mín" step="0.01">
           <input type="number" id="maxPrice" placeholder="Máx" step="0.01">
         </div>
       </div>
       <div class="filter-group">
-        <label><input type="checkbox" id="filterOnSale"> Solo en oferta</label>
+        <div class="filter-check">
+          <input type="checkbox" id="filterOnSale">
+          <label for="filterOnSale">Solo en oferta</label>
+        </div>
       </div>
-      <button id="clearFilters" class="btn btn-secondary" style="width:100%;">Limpiar filtros</button>
+      <button id="clearFilters" class="btn btn-secondary">Limpiar filtros</button>
     </aside>
 
-    <!-- Lista de productos -->
+    <!-- Lista de productos mejorada -->
     <section class="products-list" id="productsList">
       <!-- Productos dinámicos -->
     </section>
   </div>
 
   <script>
-    // Cargar inventario de localStorage
-    const inventory = JSON.parse(localStorage.getItem('inventory') || '[]');
+    // Datos de productos de ejemplo
+    const inventory = [
+      {
+        imgUrl: "https://images.unsplash.com/photo-1587202372775-e229f172b3a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+        name: "AMD Ryzen 9 5900X",
+        category: "Procesadores",
+        description: "12 núcleos, 24 hilos, hasta 4.8GHz, compatible con AM4",
+        price: 489.99,
+        onSale: false,
+        salePrice: 0,
+        rating: 4.8
+      },
+      {
+        imgUrl: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+        name: "NVIDIA RTX 3080 Ti",
+        category: "Tarjetas Gráficas",
+        description: "12GB GDDR6X, 10240 núcleos CUDA, ray tracing",
+        price: 1099.99,
+        onSale: true,
+        salePrice: 999.99,
+        rating: 4.9
+      },
+      {
+        imgUrl: "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+        name: "Corsair Vengeance RGB 32GB",
+        category: "Memorias RAM",
+        description: "DDR4 3600MHz, CL16, iluminación RGB",
+        price: 169.99,
+        onSale: false,
+        salePrice: 0,
+        rating: 4.7
+      },
+      {
+        imgUrl: "https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+        name: "Samsung 980 Pro 1TB",
+        category: "Almacenamiento",
+        description: "NVMe M.2, PCIe 4.0, hasta 7000MB/s lectura",
+        price: 149.99,
+        onSale: true,
+        salePrice: 129.99,
+        rating: 4.8
+      },
+      {
+        imgUrl: "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+        name: "ASUS ROG Strix B550-F",
+        category: "Placas Base",
+        description: "AMD AM4, ATX, PCIe 4.0, Wi-Fi 6, RGB",
+        price: 189.99,
+        onSale: false,
+        salePrice: 0,
+        rating: 4.6
+      },
+      {
+        imgUrl: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80",
+        name: "NZXT Kraken X63",
+        category: "Refrigeración",
+        description: "Enfriamiento líquido, 280mm, RGB, AM4/LGA1700",
+        price: 149.99,
+        onSale: true,
+        salePrice: 129.99,
+        rating: 4.7
+      }
+    ];
+
+    localStorage.setItem('inventory', JSON.stringify(inventory));
+    
     const productsList = document.getElementById('productsList');
     const filterName = document.getElementById('searchName');
     const filterCategory = document.getElementById('filterCategory');
@@ -197,29 +473,58 @@
     // Llenar categorías
     const categories = Array.from(new Set(inventory.map(i => i.category)));
     categories.forEach(cat => {
-      const opt = document.createElement('option'); opt.value = cat; opt.textContent = cat;
+      const opt = document.createElement('option'); 
+      opt.value = cat; 
+      opt.textContent = cat;
       filterCategory.appendChild(opt);
     });
 
-    // Renderizar lista
+    // Renderizar lista mejorada
     function renderProducts(list) {
       productsList.innerHTML = '';
       if (!list.length) {
-        productsList.innerHTML = '<p>No hay productos que coincidan.</p>';
+        productsList.innerHTML = `
+          <div class="no-products">
+            <i class="fas fa-box-open"></i>
+            <p>No encontramos productos con esos filtros.</p>
+          </div>
+        `;
         return;
       }
       list.forEach(item => {
-        const card = document.createElement('div'); card.className = 'product-card';
+        const card = document.createElement('div'); 
+        card.className = 'product-card';
+        
+        // Crear estrellas de rating
+        let starsHtml = '';
+        for (let i = 1; i <= 5; i++) {
+          if (i <= Math.floor(item.rating)) {
+            starsHtml += '<i class="fas fa-star"></i>';
+          } else if (i - 0.5 <= item.rating) {
+            starsHtml += '<i class="fas fa-star-half-alt"></i>';
+          } else {
+            starsHtml += '<i class="far fa-star"></i>';
+          }
+        }
+        
         card.innerHTML = `
-          <div class="product-image"><img src="${item.imgUrl}" alt="${item.name}"></div>
+          ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
+          <div class="product-image">
+            <img src="${item.imgUrl}" alt="${item.name}">
+          </div>
           <div class="product-info">
             <h4>${item.name}</h4>
             <p>${item.description}</p>
+            <div class="rating">${starsHtml} <span style="color: #718096; font-size: 0.8rem; margin-left: 5px;">${item.rating}</span></div>
             <div class="price-group">
-              $${item.price.toFixed(2)}
-              ${item.onSale ? `<span class="sale">$${item.salePrice.toFixed(2)}</span>` : ''}
+              ${item.onSale ? 
+                `<span class="original-price">$${item.price.toFixed(2)}</span>
+                 <span class="sale-price">$${item.salePrice.toFixed(2)}</span>` 
+                : `$${item.price.toFixed(2)}`
+              }
             </div>
-            <a href="https://wa.me/+51989530163?text=Hola,%20quiero%20comprar%20${encodeURIComponent(item.name)}" target="_blank" class="buy-btn">
+            <a href="https://wa.me/+51989530163?text=Hola,%20quiero%20comprar%20${encodeURIComponent(item.name)}" 
+               target="_blank" class="buy-btn">
               <i class="fab fa-whatsapp"></i> Comprar
             </a>
           </div>
