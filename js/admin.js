@@ -51,9 +51,9 @@ function renderTable() {
       <td>${item.name}</td>
       <td>${item.category}</td>
       <td>${item.description}</td>
-      <td>$${item.price.toFixed(2)}</td>
+      <td>S/.${item.price.toFixed(2)}</td>
       <td>${item.onSale ? 'Sí' : 'No'}</td>
-      <td>${item.onSale ? '$' + item.salePrice.toFixed(2) : '-'}</td>
+      <td>${item.onSale ? 'S/.' + item.salePrice.toFixed(2) : '-'}</td>
       <td>
         <button onclick="editItem(${i})">✏️</button>
         <button onclick="deleteItem(${i})">🗑️</button>
