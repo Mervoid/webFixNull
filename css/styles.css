@@ -337,40 +337,89 @@
         }
 
         .product-card {
-            background-color: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s ease;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            
+            height: auto; 
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
         .product-image {
-            height: 220px;
-            background-color: #e2e8f0;
+            height: 180px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .product-image img {
-            max-width: 100%;
             max-height: 100%;
+            max-width: 100%;
             object-fit: contain;
+            transition: transform 0.3s ease;
+            
+            height: 100%;
         }
 
         .product-info {
-            padding: 1.8rem;
-            flex-grow: 1;
+            padding: 1.2rem;
+            
             display: flex;
             flex-direction: column;
+           
+            justify-content: space-between;
+        }
+
+        .product-info h4 {
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            line-height: 1.3;
+        }
+
+        .product-info p {
+            
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+            
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 3; 
+            -webkit-box-orient: vertical;
+        }
+
+        .buy-btn {
+            width: 100%; 
+            margin-top: auto; 
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 0.7rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.2s;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
         }
 
         .product-category {

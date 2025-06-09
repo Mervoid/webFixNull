@@ -130,7 +130,7 @@
     .products-page {
       display: flex;
       max-width: 1400px;
-      margin: 20px auto 50px;
+      margin:28px auto 50px;
       gap: 2rem;
       padding: 0 1rem;
     }
@@ -269,6 +269,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 2rem;
+      align-items: start; /* O 'flex-start'. Esto evita que las tarjetas se estiren para llenar la altura de su fila. */
     }
 
     .product-card {
