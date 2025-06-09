@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FixNull - Componentes de PC y Soporte Técnico</title>
-    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <!-- Tu CSS -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <!-- Header -->
@@ -27,37 +29,15 @@
                     <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#testimonios">Testimonios</a></li>
                     <li><a href="#contacto">Contacto</a></li>
+                    <!-- Inventario solo visible si admin -->
+                    <li id="invMenuItem" style="display:none;"><a href="inventory.html">Inventario</a></li>
                 </ul>
             </nav>
-            <div>
-                <button id="adminLoginBtn" class="admin-btn">
-                    <i class="fas fa-user-cog"></i> Admin
-                </button>
-                <a href="https://wa.me/1234567890" class="whatsapp-contact" target="_blank">
-                    <i class="fab fa-whatsapp"></i> WhatsApp
-                </a>
-            </div>
+            <a href="#" class="whatsapp-contact" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
         </div>
     </header>
-
-    <!-- Modal de Login -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Inicio de Sesión Administrador</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="username">Usuario:</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Contraseña:</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Ingresar</button>
-            </form>
-        </div>
-    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="inicio">
@@ -122,8 +102,67 @@
             <button class="filter-btn" data-filter="memorias">Memorias RAM</button>
             <button class="filter-btn" data-filter="almacenamiento">Almacenamiento</button>
         </div>
-        <div class="products-grid" id="productsContainer">
-            <!-- Los productos se cargarán dinámicamente -->
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card animate-on-scroll" data-category="procesadores">
+                <div class="product-image">
+                    <i class="fas fa-microchip fa-5x"></i>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Procesadores</div>
+                    <h3 class="product-title">AMD Ryzen 9 5900X</h3>
+                    <p class="product-description">12 núcleos, 24 hilos, hasta 4.8GHz, compatible con AM4</p>
+                    <div class="product-price">$489.99</div>
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20AMD%20Ryzen%209%205900X" class="whatsapp-buy-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                    </a>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="product-card animate-on-scroll" data-category="tarjetas">
+                <div class="product-image">
+                    <i class="fas fa-video fa-5x"></i>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Tarjetas Gráficas</div>
+                    <h3 class="product-title">NVIDIA RTX 3080 Ti</h3>
+                    <p class="product-description">12GB GDDR6X, 10240 núcleos CUDA, ray tracing</p>
+                    <div class="product-price">$1,099.99</div>
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20NVIDIA%20RTX%203080%20Ti" class="whatsapp-buy-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                    </a>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="product-card animate-on-scroll" data-category="memorias">
+                <div class="product-image">
+                    <i class="fas fa-memory fa-5x"></i>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Memorias RAM</div>
+                    <h3 class="product-title">Corsair Vengeance RGB 32GB</h3>
+                    <p class="product-description">DDR4 3600MHz, CL16, iluminación RGB</p>
+                    <div class="product-price">$169.99</div>
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20Corsair%20Vengeance%20RGB%2032GB" class="whatsapp-buy-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                    </a>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="product-card animate-on-scroll" data-category="almacenamiento">
+                <div class="product-image">
+                    <i class="fas fa-hdd fa-5x"></i>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Almacenamiento</div>
+                    <h3 class="product-title">Samsung 980 Pro 1TB</h3>
+                    <p class="product-description">NVMe M.2, PCIe 4.0, hasta 7000MB/s lectura</p>
+                    <div class="product-price">$149.99</div>
+                    <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20Samsung%20980%20Pro%201TB" class="whatsapp-buy-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -134,7 +173,48 @@
             <p>Soporte profesional para todos tus dispositivos</p>
         </div>
         <div class="services-grid">
-            <!-- Servicios se mantienen igual -->
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon"><i class="fas fa-desktop"></i></div>
+                <h3>Reparación de Computadoras</h3>
+                <p>Diagnóstico y solución de problemas en equipos de escritorio y portátiles.</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check-circle"></i> Cambio de piezas defectuosas</li>
+                    <li><i class="fas fa-check-circle"></i> Eliminación de virus y malware</li>
+                    <li><i class="fas fa-check-circle"></i> Optimización del sistema</li>
+                    <li><i class="fas fa-check-circle"></i> Recuperación de datos</li>
+                </ul>
+                <a href="https://wa.me/1234567890?text=Hola,%20necesito%20servicio%20de%20reparación%20de%20computadoras" class="whatsapp-buy-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Solicitar Servicio
+                </a>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon"><i class="fas fa-server"></i></div>
+                <h3>Armado de PCs Personalizadas</h3>
+                <p>Construimos tu PC ideal según tus necesidades y presupuesto.</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check-circle"></i> Gaming de alto rendimiento</li>
+                    <li><i class="fas fa-check-circle"></i> Estaciones de trabajo</li>
+                    <li><i class="fas fa-check-circle"></i> Equipos de oficina</li>
+                    <li><i class="fas fa-check-circle"></i> Sistemas de edición</li>
+                </ul>
+                <a href="https://wa.me/1234567890?text=Hola,%20quiero%20información%20sobre%20armado%20de%20PC%20personalizada" class="whatsapp-buy-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Solicitar Servicio
+                </a>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <div class="service-icon"><i class="fas fa-wifi"></i></div>
+                <h3>Redes y Conectividad</h3>
+                <p>Soluciones profesionales para tu red doméstica o de oficina.</p>
+                <ul class="service-list">
+                    <li><i class="fas fa-check-circle"></i> Instalación de redes</li>
+                    <li><i class="fas fa-check-circle"></i> Configuración de routers</li>
+                    <li><i class="fas fa-check-circle"></i> Solución de problemas de conexión</li>
+                    <li><i class="fas fa-check-circle"></i> Sistemas de seguridad</li>
+                </ul>
+                <a href="https://wa.me/1234567890?text=Hola,%20necesito%20servicio%20de%20redes%20y%20conectividad" class="whatsapp-buy-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Solicitar Servicio
+                </a>
+            </div>
         </div>
     </section>
 
@@ -145,7 +225,36 @@
             <p>Experiencias reales con nuestros productos y servicios</p>
         </div>
         <div class="testimonials-grid">
-            <!-- Testimonios se mantienen igual -->
+            <div class="testimonial-card animate-on-scroll">
+                <p class="testimonial-text">Excelente servicio técnico. Repararon mi portátil en menos de 24 horas y el precio fue muy razonable. ¡Totalmente recomendados!</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <h4>Carlos Mendoza</h4>
+                        <p>Cliente desde 2020</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <p class="testimonial-text">Compré todos los componentes para mi PC gamer aquí. La asesoría fue profesional y el armado quedó perfecto. Mi equipo funciona increíble.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <h4>Ana Rodríguez</h4>
+                        <p>Cliente desde 2021</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card animate-on-scroll">
+                <p class="testimonial-text">Necesitaba actualizar los equipos de mi oficina y estos chicos hicieron un trabajo impecable. Instalaron todo rápidamente y sin problemas.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar"></div>
+                    <div class="author-info">
+                        <h4>Roberto Jiménez</h4>
+                        <p>Empresa TechCorp</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -162,305 +271,112 @@
 
     <!-- Footer -->
     <footer id="contacto">
-        <!-- Footer se mantiene igual -->
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>FixNull</h3>
+                <p>Tu tienda de confianza para componentes de PC y servicios técnicos profesionales.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#productos">Productos</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#testimonios">Testimonios</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Productos</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Procesadores</a></li>
+                    <li><a href="#">Tarjetas Gráficas</a></li>
+                    <li><a href="#">Memorias RAM</a></li>
+                    <li><a href="#">Almacenamiento</a></li>
+                    <li><a href="#">Periféricos</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <ul class="contact-info">
+                    <li><i class="fas fa-map-marker-alt"></i><span>Av. Tecnología 123, Ciudad Digital</span></li>
+                    <li><i class="fas fa-phone-alt"></i><span>+1 (555) 123-4567</span></li>
+                    <li><i class="fab fa-whatsapp"></i><span>+1 (555) 765-4321</span></li>
+                    <li><i class="fas fa-envelope"></i><span>info@techsolutions.com</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 FixNull. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
+    <!-- Scripts -->
     <script>
-        // Datos de productos (almacenados en localStorage)
-        let products = JSON.parse(localStorage.getItem('products')) || [
-            {
-                id: 1,
-                category: "procesadores",
-                title: "AMD Ryzen 9 5900X",
-                description: "12 núcleos, 24 hilos, hasta 4.8GHz, compatible con AM4",
-                price: 489.99,
-                stock: 15,
-                image: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                id: 2,
-                category: "tarjetas",
-                title: "NVIDIA RTX 3080 Ti",
-                description: "12GB GDDR6X, 10240 núcleos CUDA, ray tracing",
-                price: 1099.99,
-                stock: 8,
-                image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                id: 3,
-                category: "memorias",
-                title: "Corsair Vengeance RGB 32GB",
-                description: "DDR4 3600MHz, CL16, iluminación RGB",
-                price: 169.99,
-                stock: 22,
-                image: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-            },
-            {
-                id: 4,
-                category: "almacenamiento",
-                title: "Samsung 980 Pro 1TB",
-                description: "NVMe M.2, PCIe 4.0, hasta 7000MB/s lectura",
-                price: 149.99,
-                stock: 30,
-                image: "https://images.unsplash.com/photo-1587202372775-e229f172b5a8?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-            }
-        ];
-
-        // Guardar productos en localStorage
-        function saveProducts() {
-            localStorage.setItem('products', JSON.stringify(products));
-        }
-
         // Mobile Menu Toggle
         const menuBtn = document.getElementById('menuBtn');
         const mainNav = document.getElementById('mainNav');
-        
         menuBtn.addEventListener('click', () => {
             mainNav.classList.toggle('active');
-            menuBtn.innerHTML = mainNav.classList.contains('active') ? 
+            menuBtn.innerHTML = mainNav.classList.contains('active') ?
                 '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
-        
-        // Close menu when clicking a link
+        // Close menu on link click
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', () => {
                 mainNav.classList.remove('active');
                 menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
-        
-        // Render products
-        function renderProducts() {
-            const container = document.getElementById('productsContainer');
-            container.innerHTML = '';
-            
-            products.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card animate-on-scroll';
-                productCard.setAttribute('data-category', product.category);
-                productCard.innerHTML = `
-                    <div class="product-image">
-                        <img src="${product.image}" alt="${product.title}">
-                    </div>
-                    <div class="product-info">
-                        <div class="product-category">${product.category}</div>
-                        <h3 class="product-title">${product.title}</h3>
-                        <p class="product-description">${product.description}</p>
-                        <div class="product-meta">
-                            <div class="product-price">$${product.price.toFixed(2)}</div>
-                            <div class="product-stock ${product.stock > 10 ? 'stock-high' : product.stock > 5 ? 'stock-medium' : 'stock-low'}">
-                                ${product.stock > 10 ? 'Disponible' : product.stock > 5 ? 'Últimas unidades' : 'Stock limitado'}
-                            </div>
-                        </div>
-                        <a href="https://wa.me/1234567890?text=Hola,%20estoy%20interesado%20en%20el%20producto:%20${encodeURIComponent(product.title)}" class="whatsapp-buy-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
-                        </a>
-                    </div>
-                `;
-                container.appendChild(productCard);
-            });
-        }
-        
         // Product Filtering
         const filterBtns = document.querySelectorAll('.filter-btn');
-        
+        const productCards = document.querySelectorAll('.product-card');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons
                 filterBtns.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
                 btn.classList.add('active');
-                
                 const filter = btn.getAttribute('data-filter');
-                const productCards = document.querySelectorAll('.product-card');
-                
                 productCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
+                    card.style.display = (filter === 'all' || card.getAttribute('data-category') === filter)
+                        ? 'flex' : 'none';
                 });
             });
         });
-        
         // Animation on Scroll
         function animateOnScroll() {
-            const elements = document.querySelectorAll('.animate-on-scroll');
-            
-            elements.forEach(element => {
-                const elementPosition = element.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.3;
-                
-                if (elementPosition < screenPosition) {
-                    element.classList.add('visible');
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight / 1.3) {
+                    el.classList.add('visible');
                 }
             });
         }
-        
         window.addEventListener('scroll', animateOnScroll);
-        // Initial check in case elements are already in view
         window.addEventListener('load', animateOnScroll);
-        
         // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
                 }
             });
         });
-        
         // WhatsApp Number Replacement
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             const whatsappNumber = '+51989530163';
-            const whatsappLinks = document.querySelectorAll('[href*="wa.me"]');
-            
-            whatsappLinks.forEach(link => {
-                const currentHref = link.getAttribute('href');
-                const newHref = currentHref.replace(/wa\.me\/\d+/, `wa.me/${whatsappNumber}`);
-                link.setAttribute('href', newHref);
+            document.querySelectorAll('[href*="wa.me"]').forEach(link => {
+                link.href = link.href.replace(/wa\.me\/\d+/, `wa.me/${whatsappNumber}`);
             });
-        });
-        
-        // Admin Login System
-        const adminLoginBtn = document.getElementById('adminLoginBtn');
-        const loginModal = document.getElementById('loginModal');
-        const loginForm = document.getElementById('loginForm');
-        const closeModal = document.querySelector('.close');
-        
-        // Open login modal
-        adminLoginBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.style.display = 'block';
-        });
-        
-        // Close modal
-        closeModal.addEventListener('click', () => {
-            loginModal.style.display = 'none';
-        });
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === loginModal) {
-                loginModal.style.display = 'none';
-            }
-        });
-        
-        // Login form submission
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (username === 'admin' && password === '98701') {
-                alert('Inicio de sesión exitoso! Ahora puedes gestionar el inventario.');
-                loginModal.style.display = 'none';
-                enableInventoryManagement();
-            } else {
-                alert('Credenciales incorrectas. Inténtelo de nuevo.');
-            }
-        });
-        
-        // Enable inventory management features
-        function enableInventoryManagement() {
-            // Add edit buttons to products
-            const productCards = document.querySelectorAll('.product-card');
-            
-            productCards.forEach(card => {
-                const editBtn = document.createElement('button');
-                editBtn.className = 'edit-product-btn';
-                editBtn.innerHTML = '<i class="fas fa-edit"></i> Editar';
-                editBtn.addEventListener('click', () => {
-                    const productTitle = card.querySelector('.product-title').textContent;
-                    const product = products.find(p => p.title === productTitle);
-                    if (product) {
-                        editProduct(product);
-                    }
-                });
-                
-                card.querySelector('.product-info').appendChild(editBtn);
-            });
-            
-            // Add "Add Product" button
-            const addProductBtn = document.createElement('button');
-            addProductBtn.id = 'addProductBtn';
-            addProductBtn.className = 'btn btn-primary';
-            addProductBtn.innerHTML = '<i class="fas fa-plus"></i> Agregar Producto';
-            addProductBtn.addEventListener('click', addNewProduct);
-            
-            document.querySelector('.products').insertBefore(addProductBtn, document.querySelector('.products-grid'));
-        }
-        
-        // Edit product function
-        function editProduct(product) {
-            const newStock = prompt(`Ingrese el nuevo stock para "${product.title}":`, product.stock);
-            if (newStock !== null && !isNaN(newStock)) {
-                product.stock = parseInt(newStock);
-                
-                // Update product in array
-                const index = products.findIndex(p => p.id === product.id);
-                if (index !== -1) {
-                    products[index] = product;
-                    saveProducts();
-                    renderProducts();
-                    enableInventoryManagement(); // Re-enable management features
-                    alert('Stock actualizado correctamente!');
-                }
-            }
-        }
-        
-        // Add new product function
-        function addNewProduct() {
-            const title = prompt('Nombre del producto:');
-            if (!title) return;
-            
-            const category = prompt('Categoría (procesadores, tarjetas, memorias, almacenamiento):');
-            if (!category) return;
-            
-            const description = prompt('Descripción:');
-            if (!description) return;
-            
-            const price = parseFloat(prompt('Precio:'));
-            if (isNaN(price)) return;
-            
-            const stock = parseInt(prompt('Stock:'));
-            if (isNaN(stock)) return;
-            
-            const image = prompt('URL de la imagen (opcional):') || 'https://via.placeholder.com/300';
-            
-            const newId = products.length > 0 ? Math.max(...products.map(p => p.id)) + 1 : 1;
-            
-            const newProduct = {
-                id: newId,
-                category,
-                title,
-                description,
-                price,
-                stock,
-                image
-            };
-            
-            products.push(newProduct);
-            saveProducts();
-            renderProducts();
-            enableInventoryManagement(); // Re-enable management features
-            alert('Producto agregado correctamente!');
-        }
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            renderProducts();
-            animateOnScroll();
         });
     </script>
+    <!-- Lógica de admin: login y mostrar Inventario -->
+    <script src="js/admin.js"></script>
 </body>
 </html>
