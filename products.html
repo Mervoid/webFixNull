@@ -461,6 +461,175 @@
       color: var(--gray);
     }
 
+
+     /* Nuevos estilos para el popover */
+        .product-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000; /* Asegúrate de que esté por encima de todo */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .product-modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-modal-content {
+            background-color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 900px; /* Ancho máximo del popover */
+            width: 90%; /* Ancho responsivo */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            display: flex; /* Para la imagen y la info una al lado de la otra */
+            gap: 2rem; /* Espacio entre imagen y texto */
+            align-items: flex-start; /* Alinea la imagen y el texto arriba */
+        }
+
+        .product-modal-overlay.show .product-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--gray);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .product-modal-close:hover {
+            color: var(--danger); /* Puedes usar un color de tu paleta, por ejemplo var(--primary-dark) */
+        }
+
+        .modal-image-container {
+            flex: 0 0 350px; /* Ancho fijo para la imagen */
+            max-width: 40%; /* Ancho máximo para la imagen en relación al modal */
+            height: 300px; /* Altura fija para la imagen, ajusta si es necesario */
+            background-color: var(--light);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Asegura que la imagen no se desborde */
+        }
+
+        .modal-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Para que la imagen se ajuste sin cortarse */
+        }
+
+        .modal-info-content {
+            flex: 1; /* Ocupa el resto del espacio */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-info-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-info-content p {
+            font-size: 1rem;
+            color: var(--gray);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex-grow: 1; /* Permite que la descripción ocupe el espacio */
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .modal-price-group {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-price-group .original-price {
+            text-decoration: line-through;
+            color: #a0aec0;
+            font-size: 1.1rem;
+            margin-right: 0.8rem;
+        }
+
+        .modal-price-group .sale-price {
+            color: var(--success);
+        }
+
+        .modal-buy-btn {
+            /* Copia los estilos de tu buy-btn existente para consistencia */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s, transform 0.2s;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            width: 100%; /* Asegura que ocupe todo el ancho disponible */
+        }
+
+        .modal-buy-btn:hover {
+            background: linear-gradient(135deg, #128c7e, #0d7a6d);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive para el popover */
+        @media (max-width: 768px) {
+            .product-modal-content {
+                flex-direction: column; /* Apila imagen y texto en pantallas pequeñas */
+                padding: 1.5rem;
+                width: 95%;
+            }
+            .modal-image-container {
+                max-width: 100%;
+                flex: none; /* Deshabilita flex-basis en móviles */
+                height: 200px; /* Ajusta la altura de la imagen en móviles */
+                margin-bottom: 1rem;
+            }
+            .modal-info-content h3 {
+                font-size: 1.5rem;
+            }
+            .modal-price-group {
+                font-size: 1.2rem;
+            }
+        }
+        
+
+
+
+
+
     /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
@@ -648,6 +817,30 @@
       <p>Las categorías se han sincronizado</p>
     </div>
   </div>
+
+    <div class="product-modal-overlay" id="productModalOverlay">
+        <div class="product-modal-content" id="productModalContent">
+            <button class="product-modal-close" id="closeModalBtn">&times;</button>
+            <div class="modal-image-container">
+                <img id="modalProductImage" src="" alt="Producto">
+            </div>
+            <div class="modal-info-content">
+                <h3 id="modalProductName"></h3>
+                <p id="modalProductDescription"></p>
+                <div class="modal-price-group">
+                    <span id="modalOriginalPrice" class="original-price" style="display: none;"></span>
+                    <span id="modalCurrentPrice"></span>
+                </div>
+                <button class="modal-buy-btn" id="modalBuyBtn">
+                    <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
   <script>
     // Función para mostrar notificación
@@ -880,6 +1073,149 @@
       document.getElementById('menuBtn').innerHTML = nav.classList.contains('active') ?
         '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
     });
+
+
+
+
+
+
+    
+            // Referencias a los elementos del modal
+        const productModalOverlay = document.getElementById('productModalOverlay');
+        const productModalContent = document.getElementById('productModalContent');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalProductImage = document.getElementById('modalProductImage');
+        const modalProductName = document.getElementById('modalProductName');
+        const modalProductDescription = document.getElementById('modalProductDescription');
+        const modalOriginalPrice = document.getElementById('modalOriginalPrice');
+        const modalCurrentPrice = document.getElementById('modalCurrentPrice');
+        const modalBuyBtn = document.getElementById('modalBuyBtn');
+
+        // Función para abrir el modal con la información del producto
+        function openProductModal(product) {
+            modalProductImage.src = product.imgUrl || 'https://via.placeholder.com/300x180?text=Sin+imagen';
+            modalProductImage.alt = product.name;
+            modalProductName.textContent = product.name;
+            modalProductDescription.textContent = product.description;
+
+            if (product.onSale) {
+                modalOriginalPrice.textContent = `S/.${product.price.toFixed(2)}`;
+                modalOriginalPrice.style.display = 'inline';
+                modalCurrentPrice.textContent = `S/.${product.salePrice.toFixed(2)}`;
+                modalCurrentPrice.style.color = 'var(--success)';
+            } else {
+                modalOriginalPrice.style.display = 'none';
+                modalCurrentPrice.textContent = `S/.${product.price.toFixed(2)}`;
+                modalCurrentPrice.style.color = 'var(--secondary)'; // O tu color de texto principal
+            }
+
+            // Actualizar el enlace de WhatsApp en el botón del modal
+            const message = `Hola, estoy interesado en el producto: ${product.name}`;
+            const whatsappUrl = `https://wa.me/51989530163?text=${encodeURIComponent(message)}`;
+            modalBuyBtn.onclick = () => window.open(whatsappUrl, '_blank');
+
+            productModalOverlay.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Evita el scroll del body cuando el modal está abierto
+        }
+
+        // Función para cerrar el modal
+        function closeProductModal() {
+            productModalOverlay.classList.remove('show');
+            document.body.style.overflow = ''; // Restaura el scroll del body
+        }
+
+        // Evento para cerrar el modal con el botón X
+        closeModalBtn.addEventListener('click', closeProductModal);
+
+        // Evento para cerrar el modal al hacer clic fuera del contenido
+        productModalOverlay.addEventListener('click', (event) => {
+            if (event.target === productModalOverlay) {
+                closeProductModal();
+            }
+        });
+
+        // Modificar la función renderProducts para añadir el evento de clic a cada tarjeta
+        function renderProducts(list) {
+            const productsList = document.getElementById('productsList');
+            productsList.innerHTML = '';
+
+            if (!list.length) {
+                // ... (tu código para "No se encontraron productos") ...
+                productsList.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                        <i class="fas fa-box-open" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 1rem;"></i>
+                        <h3 style="font-family: 'Montserrat', sans-serif; color: var(--secondary); margin-bottom: 0.5rem;">No se encontraron productos</h3>
+                        <p style="color: var(--gray);">Intenta ajustar tus filtros o agregar nuevos productos desde el panel de administración</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.forEach((item, index) => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                // Agrega un data-id para identificar el producto si lo necesitas, o pasa el objeto directo
+                // productCard.dataset.productId = item.id; // Si tus productos tienen un ID único
+
+                productCard.innerHTML = `
+                    ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
+                    ${index > 3 ? '<span class="new-badge">Nuevo</span>' : ''}
+                    <div class="product-image">
+                        <img src="${item.imgUrl || 'https://via.placeholder.com/300x180?text=Sin+imagen'}" alt="${item.name}">
+                    </div>
+                    <div class="product-info">
+                        <h4>${item.name}</h4>
+                        <p>${item.description}</p>
+                        <div class="price-group">
+                            ${item.onSale ?
+                                `<span class="original-price">S/.${item.price.toFixed(2)}</span>
+                                <span class="sale-price">S/.${item.salePrice.toFixed(2)}</span>`
+                                : `S/.${item.price.toFixed(2)}`
+                            }
+                        </div>
+                        </div>
+                `;
+
+                // Evento para abrir el modal al hacer clic en la tarjeta
+                productCard.addEventListener('click', () => {
+                    // Verifica que el clic no sea en el botón de WhatsApp si lo dejas dentro de la tarjeta
+                    // if (!event.target.closest('.buy-btn')) {
+                        openProductModal(item);
+                    // }
+                });
+
+                // Ya que el botón de compra principal estará en el modal, puedes quitar el evento de compra de aquí
+                // O si quieres mantener un botón de compra directo en la tarjeta, ajusta la lógica.
+                // const buyBtn = productCard.querySelector('.buy-btn');
+                // if (buyBtn) {
+                //     buyBtn.addEventListener('click', (event) => {
+                //         event.stopPropagation(); // Evita que el clic en el botón también abra el modal
+                //         const message = `Hola, estoy interesado en el producto: ${item.name}`;
+                //         const whatsappUrl = `https://wa.me/51989530163?text=${encodeURIComponent(message)}`;
+                //         window.open(whatsappUrl, '_blank');
+                //     });
+                // }
+
+
+                productsList.appendChild(productCard);
+            });
+        }
+
+        // ... (El resto de tus event listeners para filtros, DOMContentLoaded, storage, etc. se mantienen) ...
+
+
+
+
+
+
+
+
+
+
+
+
   </script>
+
+
 </body>
 </html>
