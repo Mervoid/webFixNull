@@ -386,7 +386,7 @@
 
         /* Services Section */
         .services {
-            padding: 6rem 2rem;
+            padding: 2rem 2rem;
             background-color: white;
         }
 
@@ -447,7 +447,7 @@
 
         /* Testimonials */
         .testimonials {
-            padding: 6rem 2rem;
+            padding: 11rem 2rem;
             background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3') center/cover no-repeat;
             color: white;
         }
@@ -515,7 +515,7 @@
 
         /* CTA Section */
         .cta {
-            padding: 6rem 2rem;
+            padding:2rem 2rem;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             text-align: center;

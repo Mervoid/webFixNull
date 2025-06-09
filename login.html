@@ -4,9 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Login - FixNull</title>
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/admin.css">
 </head>
 <body>
+    <header>
+    <div class="header-container">
+      <div class="logo"><i class="fas fa-microchip"></i><span>FixNull</span></div>
+      <button class="mobile-menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="index.html#inicio">Inicio</a></li>
+          <li><a href="products.html" class="active">Productos</a></li>
+          <li><a href="index.html#servicios">Servicios</a></li>
+          <li><a href="index.html#testimonios">Testimonios</a></li>
+          <li><a href="index.html#contacto">Contacto</a></li>
+          <li id="loginMenuItem"><a href="login.html">Login</a></li>
+           <li id="invMenuItem" style="display:none;"><a href="inventory.html">Inventario</a></li>
+        </ul>
+      </nav>
+      <a href="#" class="whatsapp-contact"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+    </div>
+  </header>
   <div class="login-container">
     <h2>Iniciar Sesión</h2>
     <form id="loginForm">
