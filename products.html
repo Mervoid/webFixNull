@@ -363,7 +363,7 @@
       background-color: #fff;
       border-radius: 12px;
       padding: 2rem 2.5rem;
-      max-width: 800px;
+      max-width: auto;
       width: 90%;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       position: relative;
@@ -534,11 +534,52 @@
 
   <div class="sync-status" id="syncStatus"><i class="fas fa-sync-alt"></i><span>Ofertas Nuevas todos los días!!</span></div>
   <div class="notification" id="notification"><i class="fas fa-check-circle success"></i><div class="notification-content"><h4>Inventario Actualizado</h4><p>Las categorías se han sincronizado</p></div></div>
+
+
   <div class="product-modal-overlay" id="productModalOverlay">
     <div class="product-modal-content" id="productModalContent">
       <button class="product-modal-close" id="closeModalBtn">&times;</button>
-      <div class="modal-image-container"><img id="modalProductImage" src="" alt="Producto"></div>
-      <div class="modal-info-content"><h3 id="modalProductName"></h3><p id="modalProductDescription"></p><div class="modal-price-group"><span id="modalOriginalPrice" class="original-price" style="display:none;"></span><span id="modalCurrentPrice"></span></div><button class="modal-buy-btn" id="modalBuyBtn"><i class="fab fa-whatsapp"></i> Comprar por WhatsApp</button></div>
+      
+      <div class="modal-product-header">
+        <h3 id="modalProductName"></h3>
+        <div class="modal-category-badge" id="modalProductCategory"></div>
+      </div>
+      
+      <div class="modal-product-container">
+        <div class="modal-image-container">
+          <img id="modalProductImage" src="" alt="Producto">
+          <div class="modal-badges" id="modalBadges"></div>
+        </div>
+        
+        <div class="modal-info-container">
+          <div class="modal-description">
+            <p id="modalProductDescription"></p>
+          </div>
+          
+          <div class="modal-price-section">
+            <div class="modal-price-group">
+              <i class="fas fa-box"></i>
+              <span id="modalOriginalPrice" class="original-price"></span>
+              <span id="modalCurrentPrice" class="current-price"></span>
+              <div id="modalDiscountBadge" class="discount-badge"></div>
+            </div>
+                       
+          </div>
+          
+          <div class="modal-actions">
+            <button class="modal-buy-btn" id="modalBuyBtn">
+              <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+            </button>
+            <button class="modal-wishlist-btn" id="wishlistBtn">
+              <i class="far fa-heart"></i> Guardar en lista
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-specs" id="modalSpecs">
+        <!-- Spacio en el POPover para cualquier uso -->
+      </div>
     </div>
   </div>
 
@@ -594,7 +635,7 @@
       <div style="grid-column:1/-1;text-align:center;padding:3rem;">
         <i class="fas fa-box-open" style="font-size:3rem;color:#cbd5e0;margin-bottom:1rem;"></i>
         <h3 style="font-family:'Montserrat';color:var(--secondary);margin-bottom:0.5rem;">No se encontraron productos</h3>
-        <p style="color:var(--gray);">Intenta ajustar tus filtros o agregar nuevos productos desde el panel de administración</p>
+        <p style="color:var(--gray);">Intenta ajustar tus filtros</p>
       </div>
     `;
     return;
@@ -679,26 +720,96 @@
     }
 
     function openProductModal(product) {
-      document.getElementById('modalProductImage').src = product.imgUrl || 'https://via.placeholder.com/300x180';
+      // Configurar imagen
+      const imgElement = document.getElementById('modalProductImage');
+      imgElement.src = product.imgUrl || 'https://via.placeholder.com/500x500?text=Sin+imagen';
+      imgElement.alt = product.name;
+      
+      // Configurar nombre y categoría
       document.getElementById('modalProductName').textContent = product.name;
+      document.getElementById('modalProductCategory').textContent = product.category;
+      
+      // Configurar descripción
       document.getElementById('modalProductDescription').textContent = product.description;
       
-      const orig = document.getElementById('modalOriginalPrice');
-      const curr = document.getElementById('modalCurrentPrice');
+      // Configurar precios y descuento
+      const origPriceElem = document.getElementById('modalOriginalPrice');
+      const currentPriceElem = document.getElementById('modalCurrentPrice');
+      const discountBadgeElem = document.getElementById('modalDiscountBadge');
       
-      if(product.onSale) {
-        orig.textContent = `S/.${product.price.toFixed(2)}`;
-        orig.style.display = 'inline';
-        curr.textContent = `S/.${product.salePrice.toFixed(2)}`;
+      if (product.onSale) {
+        origPriceElem.textContent = `S/.${product.price.toFixed(2)}`;
+        origPriceElem.style.display = 'inline';
+        
+        currentPriceElem.textContent = `S/.${product.salePrice.toFixed(2)}`;
+        currentPriceElem.className = 'current-price sale-price';
+        
+        // Calcular porcentaje de descuento
+        const discount = Math.round(((product.price - product.salePrice) / product.price) * 100);
+        discountBadgeElem.textContent = `-${discount}%`;
+        discountBadgeElem.style.display = 'block';
       } else {
-        orig.style.display = 'none';
-        curr.textContent = `S/.${product.price.toFixed(2)}`;
+        origPriceElem.style.display = 'none';
+        discountBadgeElem.style.display = 'none';
+        currentPriceElem.textContent = `S/.${product.price.toFixed(2)}`;
+        currentPriceElem.className = 'current-price';
       }
       
+      // Configurar badges (oferta, nuevo)
+      const badgesContainer = document.getElementById('modalBadges');
+      badgesContainer.innerHTML = '';
+      
+      if (product.onSale) {
+        const saleBadge = document.createElement('span');
+        saleBadge.className = 'sale-badge';
+        saleBadge.textContent = 'Oferta';
+        badgesContainer.appendChild(saleBadge);
+      }
+      
+      if (product.isNew) {
+        const newBadge = document.createElement('span');
+        newBadge.className = 'new-badge';
+        newBadge.textContent = 'Nuevo';
+        badgesContainer.appendChild(newBadge);
+      }
+      
+      // Configurar stock (ejemplo)
+      //const stockStatusElem = document.getElementById('modalStockStatus');
+      //if (product.stock > 10) {
+      //  stockStatusElem.textContent = 'En stock';
+      //  stockStatusElem.className = 'stock-high';
+      //} else if (product.stock > 0) {
+      //  stockStatusElem.textContent = `Últimas ${product.stock} unidades`;
+      //  stockStatusElem.className = 'stock-medium';
+      //} else {
+      //  stockStatusElem.textContent = 'Agotado';
+      //  stockStatusElem.className = 'stock-low';
+      //}
+      
+      // Configurar especificaciones (si existen)
+      const specsContainer = document.getElementById('modalSpecs');
+      if (product.specs) {
+        specsContainer.innerHTML = '<h4>Especificaciones:</h4>';
+        const specsList = document.createElement('ul');
+        
+        product.specs.forEach(spec => {
+          const li = document.createElement('li');
+          li.innerHTML = `<strong>${spec.name}:</strong> ${spec.value}`;
+          specsList.appendChild(li);
+        });
+        
+        specsContainer.appendChild(specsList);
+      } else {
+        specsContainer.innerHTML = '';
+      }
+      
+      // Configurar botón de WhatsApp
       document.getElementById('modalBuyBtn').onclick = () => {
-        window.open(`https://wa.me/51989530163?text=${encodeURIComponent(`Hola, estoy interesado en: ${product.name}`)}`, '_blank');
+        const message = encodeURIComponent(`Hola, estoy interesado en el producto: ${product.name} - ${window.location.href}`);
+        window.open(`https://wa.me/51989530163?text=${message}`, '_blank');
       };
       
+      // Mostrar modal
       document.getElementById('productModalOverlay').classList.add('show');
       document.body.style.overflow = 'hidden';
     }
