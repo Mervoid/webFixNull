@@ -1,0 +1,219 @@
+[
+    {
+    "ID":"1",
+    "name": "Mause M90 Logitech",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "Logitech M90 patata \nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"2",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"3",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"4",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"5",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"6",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"7",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"8",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"1",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"2",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"3",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"4",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"5",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"6",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"7",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"8",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"1",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"2",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"3",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"4",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"5",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"6",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Procesadores",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"7",
+    "name": "Logitech G420",
+    "category": "Teclados",
+    "price": 99.99,
+    "onSale": false,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    },
+    {
+    "ID":"8",
+    "name": "AMD Ryzen 3 3200G",
+    "category": "Graficas",
+    "price": 99.99,
+    "onSale": true,
+    "salePrice": 89.99,
+    "imgUrl": "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
+    "description": "🔧 Características del Procesador AMD Ryzen™ 3 3200G\nNúmero de Parte: YD3200C5FHBOX\n\nTipo de CPU: AMD Ryzen™ 3 3200G\nNúmero de Núcleos (CPU): 4\nNúmero de Subprocesos (Hilos): 4\nFrecuencia Base: 3.6 GHz\nFrecuencia Máxima (Boost): Hasta 4.0 GHz\nCaché L3 Total: 4 MB\n\n🎮 Gráficos Integrados\nModelo de Gráficos: Radeon™ Vega 8\nCantidad de Núcleos de GPU: 8"
+    }
+]

@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./css/styles.css">
+  
   <style>
     :root {
       --primary: #2563eb;
@@ -130,7 +131,7 @@
     .products-page {
       display: flex;
       max-width: 1400px;
-      margin:28px auto 50px;
+      margin: 20px auto 50px;
       gap: 2rem;
       padding: 0 1rem;
     }
@@ -218,6 +219,16 @@
     .price-range input {
       flex: 1;
     }
+    .sale-price {
+      color: var(--danger);
+      font-weight: bold;
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: var(--gray);
+      margin-right: 0.5rem;
+    }
 
     .filter-check {
       display: flex;
@@ -269,7 +280,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 2rem;
-      align-items: start; /* O 'flex-start'. Esto evita que las tarjetas se estiren para llenar la altura de su fila. */
+      align-items: start;
     }
 
     .product-card {
@@ -281,7 +292,19 @@
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       position: relative;
+      opacity: 0;
+      animation: fadeInUp 0.5s ease forwards;
     }
+    
+
+    .product-card:nth-child(1) { animation-delay: 0.1s; }
+    .product-card:nth-child(2) { animation-delay: 0.2s; }
+    .product-card:nth-child(3) { animation-delay: 0.3s; }
+    .product-card:nth-child(4) { animation-delay: 0.4s; }
+    .product-card:nth-child(5) { animation-delay: 0.5s; }
+    .product-card:nth-child(6) { animation-delay: 0.6s; }
+    .product-card:nth-child(7) { animation-delay: 0.7s; }
+    .product-card:nth-child(8) { animation-delay: 0.8s; }
 
     .product-card:hover {
       transform: translateY(-8px);
@@ -314,437 +337,170 @@
       z-index: 1;
     }
 
-    .product-image {
-      height: 180px;
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    /* Modal Overlay */
+    .product-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 1rem;
+      align-items: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
     }
 
-    .product-image img {
-      max-height: 100%;
-      max-width: 100%;
-      object-fit: contain;
-      transition: transform 0.3s ease;
+    .product-modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
     }
 
-    .product-card:hover .product-image img {
-      transform: scale(1.05);
-    }
-
-    .product-info {
-      padding: 1.2rem;
-      flex: 1;
+    .product-modal-content {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
       display: flex;
       flex-direction: column;
+      gap: 1.5rem;
+      font-family: 'Roboto', sans-serif;
+      color: #334155;
+      overflow-y: auto;
+      max-height: 90vh;
+
+      
+    }
+    .modal-price-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
     }
 
-    .product-info h4 {
-      font-family: 'Montserrat', sans-serif;
-      margin-bottom: 0.5rem;
-      color: var(--secondary);
-      font-size: 1.1rem;
-      line-height: 1.3;
-    }
-
-    .product-info p {
-      flex: 1;
-      font-size: 0.9rem;
-      color: var(--gray);
-      margin-bottom: 0.75rem;
-      line-height: 1.5;
-    }
-
-    .price-group {
-      margin-bottom: 0.75rem;
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--secondary);
-    }
-
-    .price-group .original-price {
+    #modalOriginalPrice {
       text-decoration: line-through;
-      color: #a0aec0;
-      font-size: 0.9rem;
-      margin-right: 0.5rem;
+      color: #888;
+      font-size: 1.2rem;
     }
 
-    .price-group .sale-price {
-      color: var(--success);
+    #modalCurrentPrice {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--danger);
     }
 
-    .buy-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      color: white;
-      padding: 0.7rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: background 0.3s, transform 0.2s;
+    .product-modal-content h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .product-modal-content p {
       font-size: 1rem;
+      line-height: 1.5;
+      white-space: pre-line;
+      color: #556073;
+    }
+
+    .product-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
       border: none;
-      cursor: pointer;
-    }
-
-    .buy-btn:hover {
-      background: linear-gradient(135deg, #128c7e, #0d7a6d);
-      transform: translateY(-2px);
-    }
-
-    /* Sync Status */
-    .sync-status {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: white;
-      padding: 0.8rem 1.2rem;
-      border-radius: 50px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      z-index: 1000;
-      animation: fadeIn 0.5s;
-    }
-
-    .sync-status i {
-      color: var(--success);
-      animation: spin 1.5s linear infinite;
-    }
-
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: white;
-      padding: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      z-index: 1000;
-      transform: translateX(120%);
-      transition: transform 0.4s ease;
-    }
-
-    .notification.show {
-      transform: translateX(0);
-    }
-
-    .notification i {
-      font-size: 1.5rem;
-    }
-
-    .notification.success i {
-      color: var(--success);
-    }
-    
-    .notification.info i {
-      color: var(--primary);
-    }
-
-    .notification-content h4 {
-      font-weight: 600;
-      margin-bottom: 0.3rem;
-    }
-
-    .notification-content p {
-      font-size: 0.9rem;
+      font-size: 1.8rem;
       color: var(--gray);
+      cursor: pointer;
+      transition: color 0.2s ease;
     }
 
+    .product-modal-close:hover {
+      color: var(--danger);
+    }
 
-     /* Nuevos estilos para el popover */
-        .product-modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000; /* Asegúrate de que esté por encima de todo */
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-
-        .product-modal-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .product-modal-content {
-            background-color: white;
-            border-radius: 12px;
-            padding: 2rem;
-            max-width: 900px; /* Ancho máximo del popover */
-            width: 90%; /* Ancho responsivo */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            position: relative;
-            transform: translateY(20px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            display: flex; /* Para la imagen y la info una al lado de la otra */
-            gap: 2rem; /* Espacio entre imagen y texto */
-            align-items: flex-start; /* Alinea la imagen y el texto arriba */
-        }
-
-        .product-modal-overlay.show .product-modal-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .product-modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: var(--gray);
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-
-        .product-modal-close:hover {
-            color: var(--danger); /* Puedes usar un color de tu paleta, por ejemplo var(--primary-dark) */
-        }
-
-        .modal-image-container {
-            flex: 0 0 350px; /* Ancho fijo para la imagen */
-            max-width: 40%; /* Ancho máximo para la imagen en relación al modal */
-            height: 300px; /* Altura fija para la imagen, ajusta si es necesario */
-            background-color: var(--light);
-            border-radius: 8px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden; /* Asegura que la imagen no se desborde */
-        }
-
-        .modal-image-container img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain; /* Para que la imagen se ajuste sin cortarse */
-        }
-
-        .modal-info-content {
-            flex: 1; /* Ocupa el resto del espacio */
-            display: flex;
-            flex-direction: column;
-        }
-
-        .modal-info-content h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.8rem;
-            color: var(--secondary);
-            margin-bottom: 0.8rem;
-        }
-
-        .modal-info-content p {
-            font-size: 1rem;
-            color: var(--gray);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            flex-grow: 1; /* Permite que la descripción ocupe el espacio */
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .modal-price-group {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 1.5rem;
-        }
-
-        .modal-price-group .original-price {
-            text-decoration: line-through;
-            color: #a0aec0;
-            font-size: 1.1rem;
-            margin-right: 0.8rem;
-        }
-
-        .modal-price-group .sale-price {
-            color: var(--success);
-        }
-
-        .modal-buy-btn {
-            /* Copia los estilos de tu buy-btn existente para consistencia */
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background 0.3s, transform 0.2s;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-            width: 100%; /* Asegura que ocupe todo el ancho disponible */
-        }
-
-        .modal-buy-btn:hover {
-            background: linear-gradient(135deg, #128c7e, #0d7a6d);
-            transform: translateY(-2px);
-        }
-
-        /* Responsive para el popover */
-        @media (max-width: 768px) {
-            .product-modal-content {
-                flex-direction: column; /* Apila imagen y texto en pantallas pequeñas */
-                padding: 1.5rem;
-                width: 95%;
-            }
-            .modal-image-container {
-                max-width: 100%;
-                flex: none; /* Deshabilita flex-basis en móviles */
-                height: 200px; /* Ajusta la altura de la imagen en móviles */
-                margin-bottom: 1rem;
-            }
-            .modal-info-content h3 {
-                font-size: 1.5rem;
-            }
-            .modal-price-group {
-                font-size: 1.2rem;
-            }
-        }
-        
-
-
-
-
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes fadeInUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
     }
 
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
-    
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .product-card {
-      animation: fadeInUp 0.5s ease forwards;
+    /* Animaciones para modal content */
+    .product-modal-content {
+      transform: translateY(20px);
       opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
-    .product-card:nth-child(1) { animation-delay: 0.1s; }
-    .product-card:nth-child(2) { animation-delay: 0.2s; }
-    .product-card:nth-child(3) { animation-delay: 0.3s; }
-    .product-card:nth-child(4) { animation-delay: 0.4s; }
-    .product-card:nth-child(5) { animation-delay: 0.5s; }
-    .product-card:nth-child(6) { animation-delay: 0.6s; }
-
-    /* Responsive */
-    @media (max-width: 992px) {
-      .products-page {
-        flex-direction: column;
-      }
-      
-      .filter-panel {
-        position: static;
-        width: 100%;
-      }
-      
-      .products-list {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      }
+    .product-modal-overlay.show .product-modal-content {
+      transform: translateY(0);
+      opacity: 1;
     }
-    
+
     @media (max-width: 768px) {
-      .header-container {
-        flex-wrap: wrap;
-      }
-      
-      .mobile-menu-btn {
-        display: block;
-      }
-      
-      nav {
-        position: fixed;
-        top: 76px;
-        right: -100%;
-        width: 280px;
-        height: calc(100vh - 76px);
-        background-color: var(--secondary);
-        transition: right 0.4s ease;
-        padding: 2rem;
-      }
-      
-      nav.active {
-        right: 0;
-      }
-      
-      nav ul {
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-      
-      .whatsapp-contact {
-        margin-top: 1rem;
-        margin-left: auto;
-      }
+            .product-modal-content {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .modal-image-container {
+                max-width: 100%;
+            }
     }
-    
-    @media (max-width: 576px) {
-      .products-list {
-        grid-template-columns: 1fr;
-      }
-      
-      .price-range {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      
-      .header-container {
-        padding: 1rem;
-      }
-      
-      .logo {
-        font-size: 1.5rem;
-      }
+
+
+  /* Estilos para el botón de compra en el modal */
+    .modal-buy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
     }
-  </style>
+
+    .modal-buy-btn:hover {
+      background: linear-gradient(135deg, #128c7e, #0d7a6d);
+      transform: translateY(-2px);
+    }
+
+  /* Animaciones para notificación */
+    .notification {
+      transform: translateX(120%);
+      transition: transform 0.4s ease;
+    }
+    .notification.show {
+      transform: translateX(0);
+    }
+</style>
 </head>
 <body>
   <header>
     <div class="header-container">
-      <div class="logo">
-        <i class="fas fa-microchip"></i>
-        <span>FixNull</span>
-      </div>
-      <button class="mobile-menu-btn" id="menuBtn">
-        <i class="fas fa-bars"></i>
-      </button>
+      <div class="logo"><i class="fas fa-microchip"></i><span>FixNull</span></div>
+      <button class="mobile-menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
       <nav id="mainNav">
         <ul>
           <li><a href="index.html#inicio">Inicio</a></li>
@@ -756,9 +512,7 @@
           <li id="invMenuItem" style="display:none;"><a href="inventory.html">Inventario</a></li>
         </ul>
       </nav>
-            <a href="#" class="whatsapp-contact" style="display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #25d366, #128c7e); padding: 0.6rem 1.2rem; border-radius: 50px; color: white; text-decoration: none; font-weight: 500;">
-          <i class="fab fa-whatsapp"></i> WhatsApp
-      </a>
+      <a href="#" class="whatsapp-contact"><i class="fab fa-whatsapp"></i> WhatsApp</a>
     </div>
   </header>
 
@@ -768,454 +522,199 @@
         <h3>Filtrar</h3>
         <span id="categoryCount" class="category-badge">0 categorías</span>
       </div>
-      
-      <div class="filter-group">
-        <label for="searchName">Nombre</label>
-        <input type="text" id="searchName" placeholder="Buscar por nombre...">
-      </div>
-      <div class="filter-group">
-        <label for="filterCategory">Categoría</label>
-        <select id="filterCategory">
-          <option value="all">Todas las categorías</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label>Precio</label>
-        <div class="price-range">
-          <input type="number" id="minPrice" placeholder="Mín" step="0.01">
-          <input type="number" id="maxPrice" placeholder="Máx" step="0.01">
-        </div>
-      </div>
-      <div class="filter-group">
-        <div class="filter-check">
-          <input type="checkbox" id="filterOnSale">
-          <label for="filterOnSale">Solo en oferta</label>
-        </div>
-      </div>
+      <div class="filter-group"><label for="searchName">Nombre</label><input type="text" id="searchName" placeholder="Buscar por nombre..."></div>
+      <div class="filter-group"><label for="filterCategory">Categoría</label><select id="filterCategory"><option value="all">Todas las categorías</option></select></div>
+      <div class="filter-group"><label>Precio</label><div class="price-range"><input type="number" id="minPrice" placeholder="Mín" step="0.01"><input type="number" id="maxPrice" placeholder="Máx" step="0.01"></div></div>
+      <div class="filter-group"><div class="filter-check"><input type="checkbox" id="filterOnSale"><label for="filterOnSale">Solo en oferta</label></div></div>
       <button id="clearFilters">Limpiar filtros</button>
-      
-      <div class="sync-info">
-        <h4>Sincronización en tiempo real</h4>
-        <p>Actualizacion constante de cambios de productos.</p>
-      </div>
+      <div class="sync-info"><h4>Sincronización en tiempo real</h4><p>Actualizacion constante de cambios de productos.</p></div>
     </aside>
-
-    <section class="products-list" id="productsList">
-      <!-- Productos se cargarán dinámicamente -->
-    </section>
+    <section class="products-list" id="productsList"></section>
   </div>
 
-  <div class="sync-status" id="syncStatus">
-    <i class="fas fa-sync-alt"></i>
-    <span>Ofertas Nuevas todos los días!!</span>
-  </div>
-
-  <div class="notification" id="notification">
-    <i class="fas fa-check-circle success"></i>
-    <div class="notification-content">
-      <h4>Inventario Actualizado</h4>
-      <p>Las categorías se han sincronizado</p>
+  <div class="sync-status" id="syncStatus"><i class="fas fa-sync-alt"></i><span>Ofertas Nuevas todos los días!!</span></div>
+  <div class="notification" id="notification"><i class="fas fa-check-circle success"></i><div class="notification-content"><h4>Inventario Actualizado</h4><p>Las categorías se han sincronizado</p></div></div>
+  <div class="product-modal-overlay" id="productModalOverlay">
+    <div class="product-modal-content" id="productModalContent">
+      <button class="product-modal-close" id="closeModalBtn">&times;</button>
+      <div class="modal-image-container"><img id="modalProductImage" src="" alt="Producto"></div>
+      <div class="modal-info-content"><h3 id="modalProductName"></h3><p id="modalProductDescription"></p><div class="modal-price-group"><span id="modalOriginalPrice" class="original-price" style="display:none;"></span><span id="modalCurrentPrice"></span></div><button class="modal-buy-btn" id="modalBuyBtn"><i class="fab fa-whatsapp"></i> Comprar por WhatsApp</button></div>
     </div>
   </div>
-
-    <div class="product-modal-overlay" id="productModalOverlay">
-        <div class="product-modal-content" id="productModalContent">
-            <button class="product-modal-close" id="closeModalBtn">&times;</button>
-            <div class="modal-image-container">
-                <img id="modalProductImage" src="" alt="Producto">
-            </div>
-            <div class="modal-info-content">
-                <h3 id="modalProductName"></h3>
-                <p id="modalProductDescription"></p>
-                <div class="modal-price-group">
-                    <span id="modalOriginalPrice" class="original-price" style="display: none;"></span>
-                    <span id="modalCurrentPrice"></span>
-                </div>
-                <button class="modal-buy-btn" id="modalBuyBtn">
-                    <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-
-
 
   <script>
-    // Función para mostrar notificación
-    function showNotification(message) {
+    document.addEventListener('DOMContentLoaded', () => {
+      fetch('productos.json')
+        .then(res => res.json())
+        .then(data => {
+          localStorage.setItem('inventory', JSON.stringify(data));
+          initApp();
+        })
+        .catch(err => {
+          console.warn('Fetch productos.json falló, usando inventario local:', err);
+          initApp();
+        });
+    });
+
+    function initApp() {
+      updateCategoryFilter();
+      filterProducts();
+      setupFilters();
+      setupMenuAndWhatsApp();
+    }
+
+    function getInventory() {
+      const inv = localStorage.getItem('inventory');
+      return inv ? JSON.parse(inv) : [];
+    }
+
+    function updateCategoryFilter() {
+      const inventory = getInventory();
+      const categorySelect = document.getElementById('filterCategory');
+      const categories = [...new Set(inventory.map(item => item.category))];
+
+      const count = categories.length;
+      document.getElementById('categoryCount').textContent = 
+      `${count} categoría${count !== 1 ? 's' : ''}`;
+      document.getElementById('categoryCount').textContent = `${categories.length} categorías`;
+      const current = categorySelect.value;
+      categorySelect.innerHTML = '<option value="all">Todas las categorías</option>';
+      categories.forEach(cat => {
+        const o = document.createElement('option'); o.value = cat; o.textContent = cat; categorySelect.appendChild(o);
+      });
+      if(categories.includes(current)) categorySelect.value = current;
+    }
+
+    function renderProducts(list) {
+  const productsList = document.getElementById('productsList');
+  productsList.innerHTML = '';
+  
+  if (!list.length) {
+    productsList.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:3rem;">
+        <i class="fas fa-box-open" style="font-size:3rem;color:#cbd5e0;margin-bottom:1rem;"></i>
+        <h3 style="font-family:'Montserrat';color:var(--secondary);margin-bottom:0.5rem;">No se encontraron productos</h3>
+        <p style="color:var(--gray);">Intenta ajustar tus filtros o agregar nuevos productos desde el panel de administración</p>
+      </div>
+    `;
+    return;
+  }
+  
+  list.forEach((item, index) => {
+      const card = document.createElement('div');
+      card.className = 'product-card';
+      
+      // Generar HTML para precios con estilos diferenciados
+      const priceHTML = item.onSale 
+        ? `<span class="original-price">S/.${item.price.toFixed(2)}</span><span class="sale-price">S/.${item.salePrice.toFixed(2)}</span>`
+        : `S/.${item.price.toFixed(2)}`;
+      
+      card.innerHTML = `
+        ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
+        ${index > 3 ? '<span class="new-badge">Nuevo</span>' : ''}
+        <div class="product-image">
+          <img src="${item.imgUrl || 'https://via.placeholder.com/300x180?text=Sin+imagen'}" alt="${item.name}">
+        </div>
+        <div class="product-info">
+          <h4>${item.name}</h4>
+          <p>${item.description}</p>
+          <div class="price-group">${priceHTML}</div>
+        </div>
+      `;
+      
+      card.addEventListener('click', () => openProductModal(item));
+      productsList.appendChild(card);
+    });
+  }
+
+    function filterProducts() {
+      const name = document.getElementById('searchName').value.toLowerCase();
+
+     
+
+      const cat = document.getElementById('filterCategory').value;
+      const min = parseFloat(document.getElementById('minPrice').value)||0;
+      const max = parseFloat(document.getElementById('maxPrice').value)||Infinity;
+      const onSale = document.getElementById('filterOnSale').checked;
+      const inv = getInventory();
+      const out = inv.filter(item=>{
+        if(name&&!item.name.toLowerCase().includes(name))return false;
+        
+        if(cat!=='all'&&item.category!==cat) return false;
+        if(item.price<min||item.price>max) return false;
+        if(onSale&&!item.onSale) return false;
+        return true;
+      });
+      renderProducts(out);
+    }
+
+    function setupFilters() {
+      ['searchName','filterCategory','minPrice','maxPrice','filterOnSale'].forEach(id=>{
+        document.getElementById(id).addEventListener(id==='filterCategory'||id==='filterOnSale'?'change':'input',filterProducts);
+      });
+      document.getElementById('clearFilters').addEventListener('click',()=>{
+        ['searchName','minPrice','maxPrice'].forEach(i=>document.getElementById(i).value='');
+        document.getElementById('filterCategory').value='all';
+        document.getElementById('filterOnSale').checked=false;
+        filterProducts();
+      });
+    }
+
+    function setupMenuAndWhatsApp() {
+      document.getElementById('menuBtn').addEventListener('click',()=>{
+        const nav=document.getElementById('mainNav'); nav.classList.toggle('active');
+        document.getElementById('menuBtn').innerHTML=nav.classList.contains('active')?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';
+      });
+    }
+
+    const notification=document.getElementById('notification');
+    function showNotification(msg) {
       const notification = document.getElementById('notification');
-      const content = notification.querySelector('.notification-content h4');
-      content.textContent = message;
+      notification.querySelector('.notification-content h4').textContent = msg;
       
       notification.classList.add('show');
-      
       setTimeout(() => {
         notification.classList.remove('show');
       }, 3000);
     }
 
-    // Obtener productos del localStorage
-    function getInventory() {
-      const inventoryData = localStorage.getItem('inventory');
-      return inventoryData ? JSON.parse(inventoryData) : [];
+    function openProductModal(product) {
+      document.getElementById('modalProductImage').src = product.imgUrl || 'https://via.placeholder.com/300x180';
+      document.getElementById('modalProductName').textContent = product.name;
+      document.getElementById('modalProductDescription').textContent = product.description;
+      
+      const orig = document.getElementById('modalOriginalPrice');
+      const curr = document.getElementById('modalCurrentPrice');
+      
+      if(product.onSale) {
+        orig.textContent = `S/.${product.price.toFixed(2)}`;
+        orig.style.display = 'inline';
+        curr.textContent = `S/.${product.salePrice.toFixed(2)}`;
+      } else {
+        orig.style.display = 'none';
+        curr.textContent = `S/.${product.price.toFixed(2)}`;
+      }
+      
+      document.getElementById('modalBuyBtn').onclick = () => {
+        window.open(`https://wa.me/51989530163?text=${encodeURIComponent(`Hola, estoy interesado en: ${product.name}`)}`, '_blank');
+      };
+      
+      document.getElementById('productModalOverlay').classList.add('show');
+      document.body.style.overflow = 'hidden';
     }
 
-    // Función para actualizar el selector de categorías
-    function updateCategoryFilter() {
-      const inventory = getInventory();
-      const categorySelect = document.getElementById('filterCategory');
-      
-      // Obtener categorías únicas
-      const categories = Array.from(new Set(inventory.map(item => item.category)));
-      
-      // Actualizar contador
-      document.getElementById('categoryCount').textContent = `${categories.length} categorías`;
-      
-      // Guardar la selección actual
-      const currentValue = categorySelect.value;
-      
-      // Limpiar el selector (excepto la opción "Todas")
-      categorySelect.innerHTML = '<option value="all">Todas las categorías</option>';
-      
-      // Agregar nuevas categorías
-      categories.forEach(category => {
-        const option = document.createElement('option');
-        option.value = category;
-        option.textContent = category;
-        categorySelect.appendChild(option);
-      });
-      
-      // Restaurar la selección anterior si todavía existe
-      if (categories.includes(currentValue)) {
-        categorySelect.value = currentValue;
-      }
-    }
+    document.getElementById('closeModalBtn').addEventListener('click',closeProductModal);
+    document.getElementById('productModalOverlay').addEventListener('click',e=>{ if(e.target.id==='productModalOverlay') closeProductModal(); });
 
-    // Renderizar productos
-    function renderProducts(list) {
-      const productsList = document.getElementById('productsList');
-      productsList.innerHTML = '';
-      
-      if (!list.length) {
-        productsList.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-            <i class="fas fa-box-open" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 1rem;"></i>
-            <h3 style="font-family: 'Montserrat', sans-serif; color: var(--secondary); margin-bottom: 0.5rem;">No se encontraron productos</h3>
-            <p style="color: var(--gray);">Intenta ajustar tus filtros o agregar nuevos productos desde el panel de administración</p>
-          </div>
-        `;
-        return;
-      }
-      
-      list.forEach((item, index) => {
-        const productCard = document.createElement('div');
-        productCard.className = 'product-card';
-        productCard.innerHTML = `
-          ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
-          ${index > 3 ? '<span class="new-badge">Nuevo</span>' : ''}
-          <div class="product-image">
-            <img src="${item.imgUrl || 'https://via.placeholder.com/300x180?text=Sin+imagen'}" alt="${item.name}">
-          </div>
-          <div class="product-info">
-            <h4>${item.name}</h4>
-            <p>${item.description}</p>
-            <div class="price-group">
-              ${item.onSale ? 
-                `<span class="original-price">S/.${item.price.toFixed(2)}</span>
-                 <span class="sale-price">S/.${item.salePrice.toFixed(2)}</span>` 
-                : `S/.${item.price.toFixed(2)}`
-              }
-            </div>
-            <button class="buy-btn">
-              <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
-            </button>
-          </div>
-        `;
-        
-        // Agregar evento de compra
-        const buyBtn = productCard.querySelector('.buy-btn');
-        buyBtn.addEventListener('click', () => {
-          const message = `Hola, estoy interesado en el producto: ${item.name}`;
-          const whatsappUrl = `https://wa.me/51989530163?text=${encodeURIComponent(message)}`;
-          window.open(whatsappUrl, '_blank');
-        });
-        
-        productsList.appendChild(productCard);
-      });
-    }
+    function closeProductModal(){ document.getElementById('productModalOverlay').classList.remove('show'); document.body.style.overflow=''; }
 
-    // Filtrar productos
-    function filterProducts() {
-      const searchName = document.getElementById('searchName').value.toLowerCase();
-      const filterCategory = document.getElementById('filterCategory').value;
-      const minPrice = parseFloat(document.getElementById('minPrice').value) || 0;
-      const maxPrice = parseFloat(document.getElementById('maxPrice').value) || Infinity;
-      const filterOnSale = document.getElementById('filterOnSale').checked;
-      
-      const inventory = getInventory();
-      
-      const filtered = inventory.filter(item => {
-        // Filtrar por nombre
-        if (searchName && !item.name.toLowerCase().includes(searchName)) {
-          return false;
-        }
-        
-        // Filtrar por categoría
-        if (filterCategory !== 'all' && item.category !== filterCategory) {
-          return false;
-        }
-        
-        // Filtrar por precio
-        if (item.price < minPrice || item.price > maxPrice) {
-          return false;
-        }
-        
-        // Filtrar por oferta
-        if (filterOnSale && !item.onSale) {
-          return false;
-        }
-        
-        return true;
-      });
-      
-      renderProducts(filtered);
-    }
+    window.addEventListener('storage',e=>{ if(e.key==='inventory'){ updateCategoryFilter(); filterProducts(); showNotification('Inventario actualizado'); } });
 
-    // Event listeners para filtros
-    document.getElementById('searchName').addEventListener('input', filterProducts);
-    document.getElementById('filterCategory').addEventListener('change', filterProducts);
-    document.getElementById('minPrice').addEventListener('input', filterProducts);
-    document.getElementById('maxPrice').addEventListener('input', filterProducts);
-    document.getElementById('filterOnSale').addEventListener('change', filterProducts);
-    document.getElementById('clearFilters').addEventListener('click', () => {
-      document.getElementById('searchName').value = '';
-      document.getElementById('filterCategory').value = 'all';
-      document.getElementById('minPrice').value = '';
-      document.getElementById('maxPrice').value = '';
-      document.getElementById('filterOnSale').checked = false;
-      filterProducts();
+    // Inicial admin menu state
+    document.addEventListener('DOMContentLoaded',()=>{
+      if(sessionStorage.getItem('isAdmin')==='true'){ document.getElementById('invMenuItem').style.display='block'; document.getElementById('loginMenuItem').style.display='none'; }
     });
-
-    // Inicializar al cargar la página
-    document.addEventListener('DOMContentLoaded', () => {
-      // Simular datos iniciales si no existen
-      if (!localStorage.getItem('inventory')) {
-        const initialInventory = [
-          {
-            imgUrl: "https://i.ibb.co/yBWv1c42/cfa697815cba41288e3352c69a66229b.webp",
-            name: "AMD Ryzen 9 5900X",
-            category: "Procesadores",
-            description: "12 núcleos, 24 hilos, hasta 4.8GHz, compatible con AM4",
-            price: 489.99,
-            onSale: false,
-            salePrice: 0
-          },
-          {
-            imgUrl: "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            name: "NVIDIA RTX 3080 Ti",
-            category: "Tarjetas Gráficas",
-            description: "12GB GDDR6X, 10240 núcleos CUDA, ray tracing",
-            price: 1099.99,
-            onSale: true,
-            salePrice: 999.99
-          },
-          {
-            imgUrl: "https://images.unsplash.com/photo-1591370874773-6702e8f12fd8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            name: "Corsair Vengeance RGB 32GB",
-            category: "Memorias RAM",
-            description: "DDR4 3600MHz, CL16, iluminación RGB",
-            price: 169.99,
-            onSale: false,
-            salePrice: 0
-          },
-          {
-            imgUrl: "https://images.unsplash.com/photo-1603732551681-2e91159b9dc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-            name: "Samsung 980 Pro 1TB",
-            category: "Almacenamiento",
-            description: "NVMe M.2, PCIe 4.0, hasta 7000MB/s lectura",
-            price: 149.99,
-            onSale: true,
-            salePrice: 129.99
-          }
-        ];
-        
-        localStorage.setItem('inventory', JSON.stringify(initialInventory));
-        showNotification('Inventario inicial cargado');
-      }
-      
-      // Actualizar categorías y productos
-      updateCategoryFilter();
-      filterProducts();
-      
-      // Mostrar estado de login
-      if (sessionStorage.getItem('isAdmin') === 'true') {
-        document.getElementById('invMenuItem').style.display = 'block';
-        document.getElementById('loginMenuItem').style.display = 'none';
-      }
-    });
-
-    // Escuchar cambios en localStorage para actualizar en tiempo real
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'inventory') {
-        // Actualizar productos y categorías
-        updateCategoryFilter();
-        filterProducts();
-        showNotification('Inventario actualizado');
-      }
-    });
-    
-    // Mobile menu toggle
-    document.getElementById('menuBtn').addEventListener('click', () => {
-      const nav = document.getElementById('mainNav');
-      nav.classList.toggle('active');
-      document.getElementById('menuBtn').innerHTML = nav.classList.contains('active') ?
-        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-    });
-
-
-
-
-
-
-    
-            // Referencias a los elementos del modal
-        const productModalOverlay = document.getElementById('productModalOverlay');
-        const productModalContent = document.getElementById('productModalContent');
-        const closeModalBtn = document.getElementById('closeModalBtn');
-        const modalProductImage = document.getElementById('modalProductImage');
-        const modalProductName = document.getElementById('modalProductName');
-        const modalProductDescription = document.getElementById('modalProductDescription');
-        const modalOriginalPrice = document.getElementById('modalOriginalPrice');
-        const modalCurrentPrice = document.getElementById('modalCurrentPrice');
-        const modalBuyBtn = document.getElementById('modalBuyBtn');
-
-        // Función para abrir el modal con la información del producto
-        function openProductModal(product) {
-            modalProductImage.src = product.imgUrl || 'https://via.placeholder.com/300x180?text=Sin+imagen';
-            modalProductImage.alt = product.name;
-            modalProductName.textContent = product.name;
-            modalProductDescription.textContent = product.description;
-
-            if (product.onSale) {
-                modalOriginalPrice.textContent = `S/.${product.price.toFixed(2)}`;
-                modalOriginalPrice.style.display = 'inline';
-                modalCurrentPrice.textContent = `S/.${product.salePrice.toFixed(2)}`;
-                modalCurrentPrice.style.color = 'var(--success)';
-            } else {
-                modalOriginalPrice.style.display = 'none';
-                modalCurrentPrice.textContent = `S/.${product.price.toFixed(2)}`;
-                modalCurrentPrice.style.color = 'var(--secondary)'; // O tu color de texto principal
-            }
-
-            // Actualizar el enlace de WhatsApp en el botón del modal
-            const message = `Hola, estoy interesado en el producto: ${product.name}`;
-            const whatsappUrl = `https://wa.me/51989530163?text=${encodeURIComponent(message)}`;
-            modalBuyBtn.onclick = () => window.open(whatsappUrl, '_blank');
-
-            productModalOverlay.classList.add('show');
-            document.body.style.overflow = 'hidden'; // Evita el scroll del body cuando el modal está abierto
-        }
-
-        // Función para cerrar el modal
-        function closeProductModal() {
-            productModalOverlay.classList.remove('show');
-            document.body.style.overflow = ''; // Restaura el scroll del body
-        }
-
-        // Evento para cerrar el modal con el botón X
-        closeModalBtn.addEventListener('click', closeProductModal);
-
-        // Evento para cerrar el modal al hacer clic fuera del contenido
-        productModalOverlay.addEventListener('click', (event) => {
-            if (event.target === productModalOverlay) {
-                closeProductModal();
-            }
-        });
-
-        // Modificar la función renderProducts para añadir el evento de clic a cada tarjeta
-        function renderProducts(list) {
-            const productsList = document.getElementById('productsList');
-            productsList.innerHTML = '';
-
-            if (!list.length) {
-                // ... (tu código para "No se encontraron productos") ...
-                productsList.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                        <i class="fas fa-box-open" style="font-size: 3rem; color: #cbd5e0; margin-bottom: 1rem;"></i>
-                        <h3 style="font-family: 'Montserrat', sans-serif; color: var(--secondary); margin-bottom: 0.5rem;">No se encontraron productos</h3>
-                        <p style="color: var(--gray);">Intenta ajustar tus filtros o agregar nuevos productos desde el panel de administración</p>
-                    </div>
-                `;
-                return;
-            }
-
-            list.forEach((item, index) => {
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card';
-                // Agrega un data-id para identificar el producto si lo necesitas, o pasa el objeto directo
-                // productCard.dataset.productId = item.id; // Si tus productos tienen un ID único
-
-                productCard.innerHTML = `
-                    ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
-                    ${index > 3 ? '<span class="new-badge">Nuevo</span>' : ''}
-                    <div class="product-image">
-                        <img src="${item.imgUrl || 'https://via.placeholder.com/300x180?text=Sin+imagen'}" alt="${item.name}">
-                    </div>
-                    <div class="product-info">
-                        <h4>${item.name}</h4>
-                        <p>${item.description}</p>
-                        <div class="price-group">
-                            ${item.onSale ?
-                                `<span class="original-price">S/.${item.price.toFixed(2)}</span>
-                                <span class="sale-price">S/.${item.salePrice.toFixed(2)}</span>`
-                                : `S/.${item.price.toFixed(2)}`
-                            }
-                        </div>
-                        </div>
-                `;
-
-                // Evento para abrir el modal al hacer clic en la tarjeta
-                productCard.addEventListener('click', () => {
-                    // Verifica que el clic no sea en el botón de WhatsApp si lo dejas dentro de la tarjeta
-                    // if (!event.target.closest('.buy-btn')) {
-                        openProductModal(item);
-                    // }
-                });
-
-                // Ya que el botón de compra principal estará en el modal, puedes quitar el evento de compra de aquí
-                // O si quieres mantener un botón de compra directo en la tarjeta, ajusta la lógica.
-                // const buyBtn = productCard.querySelector('.buy-btn');
-                // if (buyBtn) {
-                //     buyBtn.addEventListener('click', (event) => {
-                //         event.stopPropagation(); // Evita que el clic en el botón también abra el modal
-                //         const message = `Hola, estoy interesado en el producto: ${item.name}`;
-                //         const whatsappUrl = `https://wa.me/51989530163?text=${encodeURIComponent(message)}`;
-                //         window.open(whatsappUrl, '_blank');
-                //     });
-                // }
-
-
-                productsList.appendChild(productCard);
-            });
-        }
-
-        // ... (El resto de tus event listeners para filtros, DOMContentLoaded, storage, etc. se mantienen) ...
-
-
-
-
-
-
-
-
-
-
-
-
   </script>
-
-
+  <script src="js/admin.js"></script>
 </body>
 </html>
