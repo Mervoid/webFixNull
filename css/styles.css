@@ -1267,3 +1267,78 @@
     gap: 0.5rem;
   }
 }
+/* Agregar al final del archivo */
+@media (max-width: 768px) {
+  nav {
+    position: fixed;
+    top: 76px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 76px);
+    background-color: var(--secondary);
+    transition: right 0.4s ease;
+    padding: 2rem;
+    z-index: 999;
+  }
+
+  nav.active {
+    right: 0;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .notification {
+    width: 90%;
+    right: 5%;
+    left: 5%;
+  }
+}
+/* Modificar el header para dispositivos móviles */
+@media (max-width: 768px) {
+  header {
+    padding: 0.8rem 1rem;
+    height: auto;
+  }
+  
+  .header-container {
+    flex-wrap: wrap;
+    padding: 0;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    padding: 0.5rem 0;
+  }
+  
+  nav {
+    order: 3;
+    width: 100%;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+    order: 2;
+  }
+  
+  .whatsapp-contact {
+    order: 4;
+    width: 100%;
+    margin-top: 0.5rem;
+    justify-content: center;
+  }
+  
+  /* Asegurar que los productos tengan espacio */
+  .products-list {
+    margin-top: 1rem;
+  }
+  .filter-panel{
+    padding-top: 5rem;
+  }
+}

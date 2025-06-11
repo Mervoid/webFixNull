@@ -495,6 +495,74 @@
     .notification.show {
       transform: translateX(0);
     }
+
+    /* responsives nuevos */
+@media (max-width: 768px) {
+  .header-container {
+    flex-wrap: wrap;
+  }
+  
+  .whatsapp-contact {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .products-page {
+    flex-direction: column;
+    margin-top: 80px;
+  }
+
+  .filter-panel {
+    position: relative;
+    top: 0;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .price-range {
+    flex-direction: column;
+  }
+  
+  .price-range input {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .product-card {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  
+  .product-modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .modal-product-container {
+    flex-direction: column;
+  }
+  
+  .modal-image-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .modal-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .modal-buy-btn,
+  .modal-wishlist-btn {
+    width: 100%;
+  }
+}
+
+
+
 </style>
 </head>
 <body>
@@ -709,9 +777,22 @@
     }
 
     function setupMenuAndWhatsApp() {
-      document.getElementById('menuBtn').addEventListener('click',()=>{
-        const nav=document.getElementById('mainNav'); nav.classList.toggle('active');
-        document.getElementById('menuBtn').innerHTML=nav.classList.contains('active')?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';
+      const menuBtn = document.getElementById('menuBtn');
+      const nav = document.getElementById('mainNav');
+      
+      menuBtn.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        menuBtn.innerHTML = nav.classList.contains('active') 
+          ? '<i class="fas fa-times"></i>' 
+          : '<i class="fas fa-bars"></i>';
+      });
+
+      // Cerrar menú al hacer clic en un enlace
+      document.querySelectorAll('nav a').forEach(link => {
+        link.addEventListener('click', () => {
+          nav.classList.remove('active');
+          menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        });
       });
     }
 
@@ -833,6 +914,6 @@
       if(sessionStorage.getItem('isAdmin')==='true'){ document.getElementById('invMenuItem').style.display='block'; document.getElementById('loginMenuItem').style.display='none'; }
     });
   </script>
-  <script src="js/admin.js"></script>
+  <script src=""></script>
 </body>
 </html>
