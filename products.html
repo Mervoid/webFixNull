@@ -361,5 +361,290 @@
     });
   </script>
   <script src=""></script>
+
+<!-- Espacio del POP que sale al comienzo de productos, editable. -->
+
+  <div class="pop-01-overlay" id="pop-01-overlay">
+  <div class="pop-01-container">
+    <span class="pop-01-close">&times;</span>
+    <div class="pop-01-message">
+      <h1 class="pop-01-title">Actualizando Stock de Productos <br><span class="pop-01-highlight">Consultanos por WhatsApp</span> 🚀</h1>
+      
+      <p class="pop-01-text">Estamos actualizando nuestro inventario. Si no encuentras el producto que buscas, contáctanos directamente por WhatsApp para mayor información.</p>
+      
+      <a href="https://wa.me/1234567890" class="pop-01-whatsapp" target="_blank">
+        <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+      </a>
+      
+      <div class="pop-01-notice">
+        <p><strong>Horario de atención:</strong> Lunes a Viernes de 9:00 AM a 8:00 PM</p>
+        <p><strong>Tiempo de respuesta:</strong> Normalmente respondemos en menos de 15 minutos</p>
+      </div>
+      
+      <div class="pop-01-social">
+        <a href="#" class="pop-01-social-link pop-01-facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="pop-01-social-link pop-01-instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="pop-01-social-link pop-01-twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="pop-01-social-link pop-01-tiktok"><i class="fab fa-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ESTILOS ESPECÍFICOS POP-01 */
+  .pop-01-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s ease;
+  }
+  
+  .pop-01-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .pop-01-container {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 50px 40px 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+    width: 85%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow: auto;
+    position: relative;
+    transform: scale(0.8);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .pop-01-overlay.active .pop-01-container {
+    transform: scale(1);
+  }
+  
+  .pop-01-close {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 32px;
+    cursor: pointer;
+    color: #e74c3c;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  .pop-01-close:hover {
+    color: #c0392b;
+    transform: rotate(90deg);
+    background: rgba(231, 76, 60, 0.1);
+  }
+  
+  .pop-01-message {
+    font-size: 22px;
+    line-height: 1.6;
+    color: #2c3e50;
+    padding: 20px 0 30px;
+  }
+  
+  .pop-01-title {
+    font-size: 36px;
+    color: #2980b9;
+    margin-bottom: 25px;
+    font-weight: 700;
+    text-shadow: 0 2px 3px rgba(0,0,0,0.1);
+  }
+  
+  .pop-01-highlight {
+    color: #e74c3c;
+    position: relative;
+  }
+  
+  .pop-01-highlight:after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #f39c12;
+    border-radius: 3px;
+  }
+  
+  .pop-01-text {
+    margin-bottom: 20px;
+  }
+  
+  .pop-01-whatsapp {
+    display: inline-block;
+    background: #25D366;
+    color: white !important;
+    text-decoration: none;
+    padding: 16px 35px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 20px 0 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+  }
+  
+  .pop-01-whatsapp:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+    background: #128C7E;
+  }
+  
+  .pop-01-whatsapp i {
+    margin-right: 10px;
+    font-size: 24px;
+    vertical-align: middle;
+  }
+  
+  .pop-01-social {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+  
+  .pop-01-social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .pop-01-facebook { background: #3b5998; }
+  .pop-01-instagram { background: #e1306c; }
+  .pop-01-twitter { background: #1da1f2; }
+  .pop-01-tiktok { background: #000000; }
+  
+  .pop-01-social-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  
+  .pop-01-notice {
+    background: #fff8e1;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 30px;
+    text-align: left;
+    font-size: 16px;
+  }
+  
+  .pop-01-notice strong {
+    color: #e74c3c;
+  }
+  
+  /* RESPONSIVE POP-01 */
+  @media (max-width: 768px) {
+    .pop-01-container {
+      width: 90%;
+      padding: 40px 25px 35px;
+    }
+    
+    .pop-01-message {
+      font-size: 19px;
+      padding: 15px 0 20px;
+    }
+    
+    .pop-01-title {
+      font-size: 28px;
+    }
+    
+    .pop-01-close {
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+    }
+    
+    .pop-01-whatsapp {
+      padding: 14px 30px;
+      font-size: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .pop-01-container {
+      width: 95%;
+      padding: 30px 20px;
+    }
+    
+    .pop-01-message {
+      font-size: 17px;
+    }
+    
+    .pop-01-title {
+      font-size: 24px;
+    }
+    
+    .pop-01-whatsapp {
+      padding: 12px 25px;
+      font-size: 16px;
+    }
+  }
+</style>
+
+<script>
+  // Script para POP-01
+  document.addEventListener('DOMContentLoaded', function() {
+    if(window.location.pathname.includes('products.html')) {
+      const popup = document.getElementById('pop-01-overlay');
+      const closeBtn = document.querySelector('.pop-01-close');
+      
+      // Mostrar popup después de 1 segundo
+      setTimeout(() => {
+        popup.classList.add('active');
+      }, 1000);
+      
+      // Cerrar con botón
+      closeBtn.addEventListener('click', () => {
+        popup.classList.remove('active');
+      });
+      
+      // Cerrar haciendo click fuera del contenido
+      popup.addEventListener('click', (e) => {
+        if(e.target === popup) {
+          popup.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
 </body>
 </html>

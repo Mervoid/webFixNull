@@ -282,10 +282,10 @@
                 <h3>FixNull</h3>
                 <p>Tu tienda de confianza para componentes de PC y servicios técnicos profesionales.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="pop-01-social-link pop-01-facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="pop-01-social-link pop-01-instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="pop-01-social-link pop-01-twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="pop-01-social-link pop-01-tiktok"><i class="fab fa-tiktok"></i></a>
                 </div>
             </div>
             <div class="footer-column">
@@ -384,5 +384,148 @@
     </script>
     <!-- Lógica de admin: login y mostrar Inventario -->
     <script src="js/admin.js"></script>
+
+
+
+
+   <!-- PopUP  MENSAJE pajina de inicio -->
+
+
+    <div class="popup-01-clase" id="popup-01-clase">
+  <div class="popup-content-01-clase">
+    <span class="close-btn-01-clase">&times;</span>
+    <div class="popup-message-01-clase">
+      <!-- EDITA ESTE MENSAJE DIRECTAMENTE -->
+
+        <h1></h1>
+
+      <!-- EDITA ESTE MENSAJE DIRECTAMENTE -->
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ESTILOS ESPECÍFICOS (01-Clase) */
+  .popup-01-clase {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .popup-01-clase.active {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .popup-content-01-clase {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+    width: 85%;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow: auto;
+    position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+  }
+  
+  .popup-01-clase.active .popup-content-01-clase {
+    transform: scale(1);
+  }
+  
+  .close-btn-01-clase {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.2s;
+  }
+  
+  .close-btn-01-clase:hover {
+    color: #ff0000;
+  }
+  
+  .popup-message-01-clase {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    padding: 20px 10px;
+    text-align: center;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .popup-content-01-clase {
+      width: 90%;
+      padding: 25px 15px;
+    }
+    
+    .popup-message-01-clase {
+      font-size: 16px;
+      padding: 15px 5px;
+    }
+    
+    .close-btn-01-clase {
+      top: 10px;
+      right: 15px;
+      font-size: 24px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .popup-content-01-clase {
+      width: 95%;
+    }
+    
+    .popup-message-01-clase {
+      font-size: 15px;
+    }
+  }
+</style>
+
+<script>
+  // Script de control (se ejecuta solo en index.html)
+  document.addEventListener('DOMContentLoaded', function() {
+    if(window.location.pathname.includes('index.html')) {
+      const popup = document.getElementById('popup-01-clase');
+      const closeBtn = document.querySelector('.close-btn-01-clase');
+      
+      // Mostrar popup
+      setTimeout(() => {
+        popup.classList.add(''); // poner active entre las 'active' para activar el pop up
+      }, 500);
+      
+      // Cerrar con botón
+      closeBtn.addEventListener('click', () => {
+        popup.classList.remove('active');
+      });
+      
+      // Cerrar haciendo click fuera del contenido
+      popup.addEventListener('click', (e) => {
+        if(e.target === popup) {
+          popup.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+
+
+
 </body>
 </html>
