@@ -951,8 +951,10 @@
     }
 
     .modal-description {
-    flex-grow: 1;
-    margin-bottom: 0rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: #4b5563;
     }
 
     .modal-description p {
@@ -961,18 +963,18 @@
     }
 
     .modal-price-section {
-    background: #f8fafc;
-    padding: 0rem;
-    border-radius: 0px;
-    margin-bottom: 0rem;
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
     }
 
     .modal-price-group {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .original-price {
@@ -992,18 +994,20 @@
     }
 
     .discount-badge {
-    background: var(--danger);
-    color: white;
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-weight: bold;
+      background: var(--danger);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 20px;
+      font-weight: bold;
+      font-size: 1.1rem;
     }
 
     .modal-stock-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.1rem;
+      margin-top: 1rem;
     }
 
     .stock-high {
@@ -1019,67 +1023,73 @@
     }
 
     .modal-actions {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
     }
 
     .modal-buy-btn {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: white;
-    padding: 1rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background 0.3s ease, transform 0.2s ease;
-    font-size: 1.1rem;
-    border: none;
-    cursor: pointer;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      color: white;
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease, transform 0.2s ease;
+      font-size: 1.1rem;
+      border: none;
+      cursor: pointer;
     }
 
     .modal-wishlist-btn {
-    background: #f1f5f9;
-    color: var(--secondary);
-    padding: 1rem;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
+      background: #f1f5f9;
+      color: var(--secondary);
+      padding: 1.2rem;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 1.1rem;
     }
 
     .modal-wishlist-btn:hover {
-    background: #e2e8f0;
+      background: #e2e8f0;
     }
 
     .modal-specs {
-    background: #f8fafc;
-    padding: 0rem;
-    border-radius: 0px;
-    margin-top: 0rem;
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-top: 1rem;
     }
 
     .modal-specs h4 {
-    margin-bottom: 1rem;
-    color: var(--secondary);
-    font-size: 1.2rem;
+      font-size: 1.3rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
     }
 
     .modal-specs ul {
-    list-style-type: none;
+      list-style: none;
     }
 
+
     .modal-specs li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #e2e8f0;
-    display: flex;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
     }
 
     .modal-specs li:last-child {
@@ -1087,9 +1097,10 @@
     }
 
     .modal-specs li strong {
-    min-width: 150px;
-    display: inline-block;
-    color: var(--secondary);
+      min-width: 150px;
+      display: inline-block;
+      color: var(--secondary);
+      font-weight: 600;
     }
 
     
@@ -1183,13 +1194,7 @@
 
   /* Responsive modal */
     
-    .modal-product-container {
-        flex-direction: column;
-    }
     
-    .modal-actions {
-        flex-direction: column;
-    }
     
     .modal-price-group {
         flex-direction: column;
@@ -1655,22 +1660,27 @@
 
     .product-modal-content {
       background-color: #fff;
-      border-radius: 12px;
-      padding: 2rem 2.5rem;
-      max-width: auto;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 1000px;
       width: 90%;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
       position: relative;
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 1.8rem;
       font-family: 'Roboto', sans-serif;
       color: #334155;
       overflow-y: auto;
       max-height: 90vh;
-
-      
     }
+
+    .modal-product-header h3 {
+      font-size: 1.8rem;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+
     .modal-price-group {
       display: flex;
       align-items: center;
@@ -1685,9 +1695,7 @@
     }
 
     #modalCurrentPrice {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: var(--danger);
+      font-size: 2rem;
     }
 
     .product-modal-content h3 {
@@ -1777,7 +1785,7 @@
 
     .modal-buy-btn:hover {
       background: linear-gradient(135deg, #128c7e, #0d7a6d);
-      transform: translateY(-2px);
+      transform: translateY(-3px);
     }
 
   /* Animaciones para notificación */
@@ -1836,6 +1844,10 @@
   .modal-product-container {
     flex-direction: column;
   }
+
+  .main-image-container img {
+    height: 250px;
+  }
   
   .modal-image-container {
     margin-bottom: 1.5rem;
@@ -1843,12 +1855,16 @@
   
   .modal-actions {
     flex-direction: column;
-    gap: 0.5rem;
   }
   
   .modal-buy-btn,
   .modal-wishlist-btn {
     width: 100%;
+  }
+
+  .gallery-nav {
+    width: 35px;
+    height: 35px;
   }
 }
 

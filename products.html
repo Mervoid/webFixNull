@@ -7,18 +7,17 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="./css/styles.css">
-  
-
+  <link rel="stylesheet" href="./css/stylesproducts.css">
 </head>
 <body>
   <header>
     <div class="header-container">
       <div class="logo">
-                <a href="index.html">
-                <i class="fas fa-microchip"></i>
-                <span>FixNull</span>
-            </a></div>
+        <a href="index.html">
+          <i class="fas fa-microchip"></i>
+          <span>FixNull</span>
+        </a>
+      </div>
       <button class="mobile-menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
       <nav id="mainNav">
         <ul>
@@ -53,10 +52,8 @@
     <section class="products-list" id="productsList"></section>
   </div>
 
-  <div class="sync-status" id="syncStatus"><i class="fas fa-sync-alt"></i><span>Ofertas Nuevas todos los días!!</span></div>
-  <div class="notification" id="notification"><i class="fas fa-check-circle success"></i><div class="notification-content"><h4>Inventario Actualizado</h4><p>Las categorías se han sincronizado</p></div></div>
 
-
+  <!-- Overlay y contenido del modal de producto -->
   <div class="product-modal-overlay" id="productModalOverlay">
     <div class="product-modal-content" id="productModalContent">
       <button class="product-modal-close" id="closeModalBtn">&times;</button>
@@ -67,9 +64,26 @@
       </div>
       
       <div class="modal-product-container">
+        <!-- Galería de imágenes -->
         <div class="modal-image-container">
-          <img id="modalProductImage" src="" alt="Producto">
-          <div class="modal-badges" id="modalBadges"></div>
+          <div class="main-image-container">
+            <img id="modalProductImage" src="" alt="Producto">
+            <div class="modal-badges" id="modalBadges"></div>
+            
+            <!-- Controles de navegación -->
+            <button class="gallery-nav prev" id="prevImage">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-nav next" id="nextImage">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <!-- Contador de imágenes -->
+            <div class="image-counter" id="imageCounter"></div>
+          </div>
+          
+          <!-- Miniaturas -->
+          <div class="thumbnails-container" id="thumbnailsContainer"></div>
         </div>
         
         <div class="modal-info-container">
@@ -84,7 +98,12 @@
               <span id="modalCurrentPrice" class="current-price"></span>
               <div id="modalDiscountBadge" class="discount-badge"></div>
             </div>
-                       
+            
+            <!-- Indicador de stock -->
+            <div class="modal-stock-info">
+              <i class="fas fa-warehouse"></i>
+              <span id="modalStockStatus"></span>
+            </div>
           </div>
           
           <div class="modal-actions">
@@ -99,7 +118,38 @@
       </div>
       
       <div class="modal-specs" id="modalSpecs">
-        <!-- Spacio en el POPover para cualquier uso -->
+        <!-- Espacio para cualquier uso -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Pop de bienvenida -->
+  <div class="pop-01-overlay" id="pop-01-overlay">
+    <div class="pop-01-container">
+      <div class="pop-01-background"></div>
+      <div class="pop-01-decoration"></div>
+      
+      <span class="pop-01-close" id="pop-01-close">&times;</span>
+      <div class="pop-01-message">
+        <h1 class="pop-01-title">Actualizando Stock de Productos <br><span class="pop-01-highlight">Consultanos por WhatsApp</span> 🚀</h1>
+        
+        <p class="pop-01-text">Estamos actualizando nuestro inventario. Si no encuentras el producto que buscas, contáctanos directamente por WhatsApp para mayor información.</p>
+        
+        <a href="https://wa.me/51989530163" class="pop-01-whatsapp" target="_blank">
+          <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+        </a>
+        
+        <div class="pop-01-notice">
+          <p><strong>Horario de atención:</strong> Lunes a Sabados de 9:00 AM a 8:00 PM</p>
+          <p><strong>Tiempo de respuesta:</strong> Normalmente respondemos en menos de 15 minutos</p>
+        </div>
+        
+        <div class="pop-01-social">
+          <a href="#" class="pop-01-social-link pop-01-facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="pop-01-social-link pop-01-instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="pop-01-social-link pop-01-twitter"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="pop-01-social-link pop-01-tiktok"><i class="fab fa-tiktok"></i></a>
+        </div>
       </div>
     </div>
   </div>
@@ -138,62 +188,61 @@
       const count = categories.length;
       document.getElementById('categoryCount').textContent = 
       `${count} categoría${count !== 1 ? 's' : ''}`;
-      document.getElementById('categoryCount').textContent = `${categories.length} categorías`;
       const current = categorySelect.value;
       categorySelect.innerHTML = '<option value="all">Todas las categorías</option>';
       categories.forEach(cat => {
-        const o = document.createElement('option'); o.value = cat; o.textContent = cat; categorySelect.appendChild(o);
+        const o = document.createElement('option'); 
+        o.value = cat; 
+        o.textContent = cat; 
+        categorySelect.appendChild(o);
       });
       if(categories.includes(current)) categorySelect.value = current;
     }
 
     function renderProducts(list) {
-  const productsList = document.getElementById('productsList');
-  productsList.innerHTML = '';
-  
-  if (!list.length) {
-    productsList.innerHTML = `
-      <div style="grid-column:1/-1;text-align:center;padding:3rem;">
-        <i class="fas fa-box-open" style="font-size:3rem;color:#cbd5e0;margin-bottom:1rem;"></i>
-        <h3 style="font-family:'Montserrat';color:var(--secondary);margin-bottom:0.5rem;">No se encontraron productos</h3>
-        <p style="color:var(--gray);">Intenta ajustar tus filtros</p>
-      </div>
-    `;
-    return;
-  }
-  
-  list.forEach((item, index) => {
-      const card = document.createElement('div');
-      card.className = 'product-card';
+      const productsList = document.getElementById('productsList');
+      productsList.innerHTML = '';
       
-      // Generar HTML para precios con estilos diferenciados
-      const priceHTML = item.onSale 
-        ? `<span class="original-price">S/.${item.price.toFixed(2)}</span><span class="sale-price">S/.${item.salePrice.toFixed(2)}</span>`
-        : `S/.${item.price.toFixed(2)}`;
+      if (!list.length) {
+        productsList.innerHTML = `
+          <div style="grid-column:1/-1;text-align:center;padding:3rem;">
+            <i class="fas fa-box-open" style="font-size:3rem;color:#cbd5e0;margin-bottom:1rem;"></i>
+            <h3 style="font-family:'Montserrat';color:var(--secondary);margin-bottom:0.5rem;">No se encontraron productos</h3>
+            <p style="color:var(--gray);">Intenta ajustar tus filtros</p>
+          </div>
+        `;
+        return;
+      }
       
-      card.innerHTML = `
-        ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
-        ${index > 3 ? '<span class="new-badge">Nuevo</span>' : ''}
-        <div class="product-image">
-          <img src="${item.imgUrl || 'https://via.placeholder.com/300x180?text=Sin+imagen'}" alt="${item.name}">
-        </div>
-        <div class="product-info">
-          <h4>${item.name}</h4>
-          <p>${item.description}</p>
-          <div class="price-group">${priceHTML}</div>
-        </div>
-      `;
-      
-      card.addEventListener('click', () => openProductModal(item));
-      productsList.appendChild(card);
-    });
-  }
+      list.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        
+        // Generar HTML para precios con estilos diferenciados
+        const priceHTML = item.onSale 
+          ? `<span class="original-price">S/.${item.price.toFixed(2)}</span><span class="sale-price">S/.${item.salePrice.toFixed(2)}</span>`
+          : `S/.${item.price.toFixed(2)}`;
+        
+        card.innerHTML = `
+          ${item.onSale ? '<span class="sale-badge">Oferta</span>' : ''}
+          ${index > 3 ? '<span class="new-badge">Nuevo</span>' : ''}
+          <div class="product-image">
+            <img src="${item.imgUrl1 || 'https://via.placeholder.com/300x180?text=Sin+imagen'}" alt="${item.name}">
+          </div>
+          <div class="product-info">
+            <h4>${item.name}</h4>
+            <p>${item.description}</p>
+            <div class="price-group">${priceHTML}</div>
+          </div>
+        `;
+        
+        card.addEventListener('click', () => openProductModal(item));
+        productsList.appendChild(card);
+      });
+    }
 
     function filterProducts() {
       const name = document.getElementById('searchName').value.toLowerCase();
-
-     
-
       const cat = document.getElementById('filterCategory').value;
       const min = parseFloat(document.getElementById('minPrice').value)||0;
       const max = parseFloat(document.getElementById('maxPrice').value)||Infinity;
@@ -201,7 +250,6 @@
       const inv = getInventory();
       const out = inv.filter(item=>{
         if(name&&!item.name.toLowerCase().includes(name))return false;
-        
         if(cat!=='all'&&item.category!==cat) return false;
         if(item.price<min||item.price>max) return false;
         if(onSale&&!item.onSale) return false;
@@ -242,11 +290,9 @@
       });
     }
 
-    const notification=document.getElementById('notification');
     function showNotification(msg) {
       const notification = document.getElementById('notification');
       notification.querySelector('.notification-content h4').textContent = msg;
-      
       notification.classList.add('show');
       setTimeout(() => {
         notification.classList.remove('show');
@@ -254,10 +300,73 @@
     }
 
     function openProductModal(product) {
+      // Recoger todas las imágenes disponibles
+      const images = [];
+      for (let i = 1; i <= 6; i++) {
+        const imgKey = `imgUrl${i}`;
+        if (product[imgKey] && product[imgKey].trim() !== '') {
+          images.push(product[imgKey]);
+        }
+      }
+      
+      // Si no hay imágenes, usar placeholder
+      if (images.length === 0) {
+        images.push('https://via.placeholder.com/500x500?text=Sin+imagen');
+      }
+      
       // Configurar imagen
       const imgElement = document.getElementById('modalProductImage');
-      imgElement.src = product.imgUrl || 'https://via.placeholder.com/500x500?text=Sin+imagen';
-      imgElement.alt = product.name;
+      const thumbnailsContainer = document.getElementById('thumbnailsContainer');
+      const imageCounter = document.getElementById('imageCounter');
+      thumbnailsContainer.innerHTML = '';
+      
+      // Mostrar primera imagen
+      imgElement.src = images[0];
+      imageCounter.textContent = `1/${images.length}`;
+      
+      // Crear miniaturas para todas las imágenes
+      images.forEach((img, index) => {
+        const thumbnail = document.createElement('img');
+        thumbnail.src = img;
+        thumbnail.alt = `Miniatura ${index + 1}`;
+        thumbnail.className = 'thumbnail';
+        if (index === 0) thumbnail.classList.add('active');
+        
+        thumbnail.addEventListener('click', () => {
+          imgElement.src = img;
+          // Actualizar clase activa
+          document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+          thumbnail.classList.add('active');
+          // Actualizar contador
+          imageCounter.textContent = `${index + 1}/${images.length}`;
+        });
+        
+        thumbnailsContainer.appendChild(thumbnail);
+      });
+      
+      // Configurar navegación de imágenes
+      document.getElementById('prevImage').addEventListener('click', () => {
+        const currentIndex = images.indexOf(imgElement.src);
+        const prevIndex = (currentIndex - 1 + images.length) % images.length;
+        imgElement.src = images[prevIndex];
+        updateActiveThumbnail(prevIndex);
+        imageCounter.textContent = `${prevIndex + 1}/${images.length}`;
+      });
+      
+      document.getElementById('nextImage').addEventListener('click', () => {
+        const currentIndex = images.indexOf(imgElement.src);
+        const nextIndex = (currentIndex + 1) % images.length;
+        imgElement.src = images[nextIndex];
+        updateActiveThumbnail(nextIndex);
+        imageCounter.textContent = `${nextIndex + 1}/${images.length}`;
+      });
+      
+      function updateActiveThumbnail(index) {
+        document.querySelectorAll('.thumbnail').forEach((t, i) => {
+          if (i === index) t.classList.add('active');
+          else t.classList.remove('active');
+        });
+      }
       
       // Configurar nombre y categoría
       document.getElementById('modalProductName').textContent = product.name;
@@ -308,38 +417,42 @@
       }
       
       // Configurar stock (ejemplo)
-      //const stockStatusElem = document.getElementById('modalStockStatus');
-      //if (product.stock > 10) {
-      //  stockStatusElem.textContent = 'En stock';
-      //  stockStatusElem.className = 'stock-high';
-      //} else if (product.stock > 0) {
-      //  stockStatusElem.textContent = `Últimas ${product.stock} unidades`;
-      //  stockStatusElem.className = 'stock-medium';
-      //} else {
-      //  stockStatusElem.textContent = 'Agotado';
-      //  stockStatusElem.className = 'stock-low';
-      //}
+      const stockStatusElem = document.getElementById('modalStockStatus');
+      // Aquí puedes agregar lógica real si tienes stock en el JSON
+      stockStatusElem.textContent = 'Disponible';
+      stockStatusElem.className = 'stock-high';
       
       // Configurar especificaciones (si existen)
       const specsContainer = document.getElementById('modalSpecs');
-      if (product.specs) {
+      specsContainer.innerHTML = '';
+      
+      // Formatear la descripción como especificaciones si no hay un campo separado
+      if (product.description) {
         specsContainer.innerHTML = '<h4>Especificaciones:</h4>';
         const specsList = document.createElement('ul');
         
-        product.specs.forEach(spec => {
-          const li = document.createElement('li');
-          li.innerHTML = `<strong>${spec.name}:</strong> ${spec.value}`;
-          specsList.appendChild(li);
+        // Dividir la descripción por saltos de línea
+        const lines = product.description.split('\n');
+        lines.forEach(line => {
+          if (line.trim()) {
+            const li = document.createElement('li');
+            // Dividir cada línea en nombre y valor
+            const parts = line.split(':');
+            if (parts.length > 1) {
+              li.innerHTML = `<strong>${parts[0]}:</strong> ${parts.slice(1).join(':')}`;
+            } else {
+              li.textContent = line;
+            }
+            specsList.appendChild(li);
+          }
         });
         
         specsContainer.appendChild(specsList);
-      } else {
-        specsContainer.innerHTML = '';
       }
       
       // Configurar botón de WhatsApp
       document.getElementById('modalBuyBtn').onclick = () => {
-        const message = encodeURIComponent(`Hola, estoy interesado en el producto: ${product.name} - ${window.location.href}`);
+        const message = encodeURIComponent(`Hola, estoy interesado en el producto: ${product.name} `);
         window.open(`https://wa.me/51989530163?text=${message}`, '_blank');
       };
       
@@ -348,279 +461,43 @@
       document.body.style.overflow = 'hidden';
     }
 
-    document.getElementById('closeModalBtn').addEventListener('click',closeProductModal);
-    document.getElementById('productModalOverlay').addEventListener('click',e=>{ if(e.target.id==='productModalOverlay') closeProductModal(); });
+    function closeProductModal() {
+      document.getElementById('productModalOverlay').classList.remove('show');
+      document.body.style.overflow = '';
+    }
 
-    function closeProductModal(){ document.getElementById('productModalOverlay').classList.remove('show'); document.body.style.overflow=''; }
+    // Event listeners para cerrar el modal
+    document.getElementById('closeModalBtn').addEventListener('click', closeProductModal);
+    document.getElementById('productModalOverlay').addEventListener('click', e => {
+      if (e.target === document.getElementById('productModalOverlay')) {
+        closeProductModal();
+      }
+    });
 
-    window.addEventListener('storage',e=>{ if(e.key==='inventory'){ updateCategoryFilter(); filterProducts(); showNotification('Inventario actualizado'); } });
+    window.addEventListener('storage', e => {
+      if (e.key === 'inventory') {
+        updateCategoryFilter();
+        filterProducts();
+        showNotification('Inventario actualizado');
+      }
+    });
 
     // Inicial admin menu state
-    document.addEventListener('DOMContentLoaded',()=>{
-      if(sessionStorage.getItem('isAdmin')==='true'){ document.getElementById('invMenuItem').style.display='block'; document.getElementById('loginMenuItem').style.display='none'; }
+    document.addEventListener('DOMContentLoaded', () => {
+      if (sessionStorage.getItem('isAdmin') === 'true') {
+        document.getElementById('invMenuItem').style.display = 'block';
+        document.getElementById('loginMenuItem').style.display = 'none';
+      }
     });
-  </script>
-  <script src=""></script>
 
-<!-- Espacio del POP que sale al comienzo de productos, editable. -->
-
-  <div class="pop-01-overlay" id="pop-01-overlay">
-  <div class="pop-01-container">
-    <span class="pop-01-close">&times;</span>
-    <div class="pop-01-message">
-      <h1 class="pop-01-title">Actualizando Stock de Productos <br><span class="pop-01-highlight">Consultanos por WhatsApp</span> 🚀</h1>
-      
-      <p class="pop-01-text">Estamos actualizando nuestro inventario. Si no encuentras el producto que buscas, contáctanos directamente por WhatsApp para mayor información.</p>
-      
-      <a href="https://wa.me/1234567890" class="pop-01-whatsapp" target="_blank">
-        <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
-      </a>
-      
-      <div class="pop-01-notice">
-        <p><strong>Horario de atención:</strong> Lunes a Viernes de 9:00 AM a 8:00 PM</p>
-        <p><strong>Tiempo de respuesta:</strong> Normalmente respondemos en menos de 15 minutos</p>
-      </div>
-      
-      <div class="pop-01-social">
-        <a href="#" class="pop-01-social-link pop-01-facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="pop-01-social-link pop-01-instagram"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="pop-01-social-link pop-01-twitter"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="pop-01-social-link pop-01-tiktok"><i class="fab fa-tiktok"></i></a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<style>
-  /* ESTILOS ESPECÍFICOS POP-01 */
-  .pop-01-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.85);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.4s ease;
-  }
-  
-  .pop-01-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  .pop-01-container {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    padding: 50px 40px 40px;
-    border-radius: 20px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.4);
-    width: 85%;
-    max-width: 700px;
-    max-height: 90vh;
-    overflow: auto;
-    position: relative;
-    transform: scale(0.8);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    text-align: center;
-    border: 1px solid rgba(0,0,0,0.1);
-  }
-  
-  .pop-01-overlay.active .pop-01-container {
-    transform: scale(1);
-  }
-  
-  .pop-01-close {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 32px;
-    cursor: pointer;
-    color: #e74c3c;
-    transition: all 0.3s ease;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-  }
-  
-  .pop-01-close:hover {
-    color: #c0392b;
-    transform: rotate(90deg);
-    background: rgba(231, 76, 60, 0.1);
-  }
-  
-  .pop-01-message {
-    font-size: 22px;
-    line-height: 1.6;
-    color: #2c3e50;
-    padding: 20px 0 30px;
-  }
-  
-  .pop-01-title {
-    font-size: 36px;
-    color: #2980b9;
-    margin-bottom: 25px;
-    font-weight: 700;
-    text-shadow: 0 2px 3px rgba(0,0,0,0.1);
-  }
-  
-  .pop-01-highlight {
-    color: #e74c3c;
-    position: relative;
-  }
-  
-  .pop-01-highlight:after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background: #f39c12;
-    border-radius: 3px;
-  }
-  
-  .pop-01-text {
-    margin-bottom: 20px;
-  }
-  
-  .pop-01-whatsapp {
-    display: inline-block;
-    background: #25D366;
-    color: white !important;
-    text-decoration: none;
-    padding: 16px 35px;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 20px;
-    margin: 20px 0 30px;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
-  }
-  
-  .pop-01-whatsapp:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
-    background: #128C7E;
-  }
-  
-  .pop-01-whatsapp i {
-    margin-right: 10px;
-    font-size: 24px;
-    vertical-align: middle;
-  }
-  
-  .pop-01-social {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-  }
-  
-  .pop-01-social-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    color: white;
-    font-size: 20px;
-    transition: all 0.3s ease;
-    text-decoration: none;
-  }
-  
-  .pop-01-facebook { background: #3b5998; }
-  .pop-01-instagram { background: #e1306c; }
-  .pop-01-twitter { background: #1da1f2; }
-  .pop-01-tiktok { background: #000000; }
-  
-  .pop-01-social-link:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
-  
-  .pop-01-notice {
-    background: #fff8e1;
-    border-left: 4px solid #ffc107;
-    padding: 15px;
-    border-radius: 0 8px 8px 0;
-    margin-top: 30px;
-    text-align: left;
-    font-size: 16px;
-  }
-  
-  .pop-01-notice strong {
-    color: #e74c3c;
-  }
-  
-  /* RESPONSIVE POP-01 */
-  @media (max-width: 768px) {
-    .pop-01-container {
-      width: 90%;
-      padding: 40px 25px 35px;
-    }
-    
-    .pop-01-message {
-      font-size: 19px;
-      padding: 15px 0 20px;
-    }
-    
-    .pop-01-title {
-      font-size: 28px;
-    }
-    
-    .pop-01-close {
-      top: 15px;
-      right: 20px;
-      font-size: 28px;
-    }
-    
-    .pop-01-whatsapp {
-      padding: 14px 30px;
-      font-size: 18px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .pop-01-container {
-      width: 95%;
-      padding: 30px 20px;
-    }
-    
-    .pop-01-message {
-      font-size: 17px;
-    }
-    
-    .pop-01-title {
-      font-size: 24px;
-    }
-    
-    .pop-01-whatsapp {
-      padding: 12px 25px;
-      font-size: 16px;
-    }
-  }
-</style>
-
-<script>
-  // Script para POP-01
-  document.addEventListener('DOMContentLoaded', function() {
-    if(window.location.pathname.includes('products.html')) {
+    // Script para POP-01
+    document.addEventListener('DOMContentLoaded', function() {
       const popup = document.getElementById('pop-01-overlay');
-      const closeBtn = document.querySelector('.pop-01-close');
+      const closeBtn = document.getElementById('pop-01-close');
       
       // Mostrar popup después de 1 segundo
       setTimeout(() => {
-        popup.classList.add('active');
+        popup.classList.add('active'); // Borre 'active' si quiere que no aparesca el popup del comienzo caso contrario dejelo
       }, 1000);
       
       // Cerrar con botón
@@ -630,21 +507,178 @@
       
       // Cerrar haciendo click fuera del contenido
       popup.addEventListener('click', (e) => {
-        if(e.target === popup) {
+        if (e.target === popup) {
           popup.classList.remove('active');
         }
       });
+    });
+
+    
+  </script>
+
+  <script>
+    // WhatsApp Number Replacement
+        document.addEventListener('DOMContentLoaded', () => {
+            const whatsappNumber = '+51989530163';
+            document.querySelectorAll('[href*="wa.me"]').forEach(link => {
+                link.href = link.href.replace(/wa\.me\/\d+/, `wa.me/${whatsappNumber}`);
+            });
+        });
+  </script>
+
+  <script>
+    //Notificaciones Scrip
+
+    // Base de datos de notificaciones
+const notificacionesDB = [
+  {
+    tipo: 'info',
+    titulo: 'Ofertas especiales',
+    mensaje: '¡No te pierdas nuestras ofertas exclusivas de hoy!',
+    icono: '🛒'
+  },
+  {
+    tipo: 'exito',
+    titulo: 'Productos nuevos',
+    mensaje: 'Acabamos de añadir nuevos productos al catálogo',
+    icono: '🆕'
+  },
+  //{
+    //tipo: 'advertencia',
+    //titulo: 'Carrito pendiente',
+    //mensaje: 'Tienes productos en el carrito esperando por ti',
+    //icono: '🛒'
+  //},
+  {
+    tipo: 'info',
+    titulo: 'Envío gratis',
+    mensaje: '¡Aprovecha envío gratis en compras mayores a S/200!',
+    icono: '🚚'
+  },
+  {
+    tipo: 'exito',
+    titulo: 'Descuento activo',
+    mensaje: 'Usa el código FIX10 para 10% de descuento',
+    icono: '🎟️'
+  }
+];
+
+// Función para crear notificaciones
+function crearNotificacion(tipo, titulo, mensaje, icono = null) {
+  const contenedor = document.querySelector('.notificaciones-contenedor');
+  
+  // Iconos predeterminados
+  const iconos = {
+    exito: '✓',
+    error: '!',
+    advertencia: '⚠',
+    info: 'i'
+  };
+  
+  // Usar icono personalizado si está disponible
+  const iconoMostrar = icono || iconos[tipo] || 'i';
+  
+  // Crear elemento de notificación
+  const notificacion = document.createElement('div');
+  notificacion.className = `notificacion notificacion-${tipo}`;
+  
+  // Generar ID único para cada notificación
+  const notificacionId = `notif-${Date.now()}`;
+  notificacion.id = notificacionId;
+  
+  notificacion.innerHTML = `
+    <div class="notificacion-contenido">
+      <div class="notificacion-icono">${iconoMostrar}</div>
+      <div class="notificacion-texto">
+        <div class="notificacion-titulo">${titulo}</div>
+        <div class="notificacion-mensaje">${mensaje}</div>
+      </div>
+    </div>
+    <button class="notificacion-cerrar">×</button>
+    <div class="notificacion-progreso"></div>
+    <div class="tiempo-restante">5 minutos </div>
+  `;
+  
+  // Agregar al contenedor
+  contenedor.appendChild(notificacion);
+  
+  // Configurar cierre automático
+  const cerrar = () => {
+    notificacion.classList.add('salida');
+    setTimeout(() => {
+      if (document.contains(notificacion)) {
+        notificacion.remove();
+      }
+    }, 400);
+  };
+  
+  setTimeout(cerrar, 5000);
+  
+  // Evento para cerrar manualmente
+  notificacion.querySelector('.notificacion-cerrar').addEventListener('click', cerrar);
+  
+  // Devolver ID para posible manejo futuro
+  return notificacionId;
+}
+
+// Función para mostrar notificaciones aleatorias
+function mostrarNotificacionAleatoria() {
+  if (notificacionesDB.length === 0) return;
+  
+  const notificacionAleatoria = notificacionesDB[Math.floor(Math.random() * notificacionesDB.length)];
+  crearNotificacion(
+    notificacionAleatoria.tipo,
+    notificacionAleatoria.titulo,
+    notificacionAleatoria.mensaje,
+    notificacionAleatoria.icono
+  );
+}
+
+// Configurar intervalo de 5 minutos
+let intervaloNotificaciones = setInterval(mostrarNotificacionAleatoria, 8 * 60 * 1000);
+
+// Iniciar con una notificación
+setTimeout(mostrarNotificacionAleatoria, 2000);
+
+// Crear botón de configuración
+function crearBotonConfiguracion() {
+  const boton = document.createElement('button');
+  boton.className = 'config-notificaciones';
+  boton.innerHTML = '🔔';
+  boton.title = 'Configurar notificaciones';
+  
+  boton.addEventListener('click', () => {
+    // Pausar/reanudar notificaciones
+    if (intervaloNotificaciones) {
+      clearInterval(intervaloNotificaciones);
+      intervaloNotificaciones = null;
+      boton.innerHTML = '🔕';
+      boton.title = 'Notificaciones pausadas - Click para reanudar';
+      crearNotificacion('advertencia', 'Notificaciones', 'Las notificaciones periódicas han sido pausadas');
+    } else {
+      intervaloNotificaciones = setInterval(mostrarNotificacionAleatoria, 8 * 60 * 1000);
+      boton.innerHTML = '🔔';
+      boton.title = 'Notificaciones activas - Click para pausar';
+      crearNotificacion('info', 'Notificaciones', 'Las notificaciones periódicas han sido reanudadas');
     }
   });
-</script>
+  
+  document.body.appendChild(boton);
+}
 
-
-
-
-
-
-
-
-
+// Iniciar el sistema de notificaciones
+window.addEventListener('DOMContentLoaded', () => {
+  crearBotonConfiguracion();
+  
+  // Mostrar notificación inicial
+  crearNotificacion(
+    'info', 
+    'Notificaciones activas', 
+    'Recibirás notificaciones periódicas cada 5 minutos',
+    '⏰'
+  );
+});
+  </script>
+  <div class="notificaciones-contenedor"></div>
 </body>
 </html>
