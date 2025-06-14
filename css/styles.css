@@ -397,6 +397,7 @@
             text-overflow: ellipsis; 
             display: -webkit-box; 
             -webkit-line-clamp: 3; 
+            line-clamp: 3;
             -webkit-box-orient: vertical;
         }
 
@@ -1790,9 +1791,7 @@
 
     /* responsives nuevos */
 @media (max-width: 768px) {
-  .header-container {
-    flex-wrap: wrap;
-  }
+  
   
   .whatsapp-contact {
     order: 3;
@@ -1850,5 +1849,126 @@
   .modal-buy-btn,
   .modal-wishlist-btn {
     width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Header y navegación */
+  header {
+    padding: 0.8rem 1rem;
+    height: auto;
+  }
+  
+  .header-container {
+    flex-wrap: wrap;
+    padding: 0.5rem;
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+    order: 2;
+  }
+  
+  #mainNav {
+    position: fixed;
+    top: 70px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 70px);
+    background-color: var(--secondary);
+    transition: right 0.4s ease;
+    padding: 2rem;
+    z-index: 999;
+  }
+  
+  #mainNav.active {
+    right: 0;
+  }
+  
+  #mainNav ul {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .whatsapp-contact {
+    order: 3;
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+
+  /* Hero section */
+  .hero {
+    padding-top: 5rem;
+    min-height: auto;
+    padding-bottom: 3rem;
+  }
+  
+  .hero h1 {
+    font-size: 2.3rem;
+  }
+  
+  .hero p {
+    font-size: 1.1rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+  }
+  
+  /* Secciones */
+  .features, .products, .services, .testimonials, .cta {
+    padding: 3rem 1.5rem;
+  }
+  
+  .section-title h2 {
+    font-size: 2rem;
+  }
+  
+  /* Tarjetas de productos y servicios */
+  .features-grid, .products-grid, .services-grid, .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .feature-card, .product-card, .service-card, .testimonial-card {
+    padding: 1.5rem;
+  }
+  
+  /* Footer */
+  .footer-content {
+    gap: 2rem;
+  }
+  
+  .footer-column {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+  }
+  
+  .hero-buttons .btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .products-filter {
+    flex-wrap: wrap;
+  }
+  
+  .filter-btn {
+    margin-bottom: 0.5rem;
+  }
+  
+  .feature-card h3, .service-card h3 {
+    font-size: 1.3rem;
   }
 }
